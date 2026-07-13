@@ -1,0 +1,27 @@
+<view class="page">
+  <!-- 加入中 -->
+  <view class="loading" wx:if="{{isJoining}}">
+    <text>正在加入行程...</text>
+  </view>
+
+  <!-- 邀请页面 -->
+  <view class="invite-page" wx:elif="{{!loading}}">
+    <view class="invite-card">
+      <view class="invite-card__title">邀请加入</view>
+      <view class="invite-card__trip-name">{{tripName}}</view>
+
+      <view class="invite-card__code-section">
+        <view class="invite-card__label">邀请码</view>
+        <view class="invite-card__code">{{inviteCode}}</view>
+        <view class="invite-card__hint">分享邀请码给朋友，输入即可加入</view>
+      </view>
+
+      <view class="invite-card__actions">
+        <button class="btn btn-secondary" bindtap="onCopyCode">复制邀请码</button>
+        <button class="btn btn-primary" open-type="share">分享给好友</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:else>加载中...</view>
+</view>

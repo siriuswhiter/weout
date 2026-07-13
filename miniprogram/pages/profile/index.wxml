@@ -1,0 +1,53 @@
+<view class="page profile-page">
+  <!-- 用户信息区域 -->
+  <view class="profile-header">
+    <view class="avatar-wrapper">
+      <button class="avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image wx:if="{{userInfo.avatarUrl}}" class="avatar-img" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="avatar-placeholder" style="background: {{avatarColor}}">
+          {{avatarText}}
+        </view>
+      </button>
+    </view>
+    <view class="nickname-wrapper">
+      <input type="nickname" class="nickname-input" value="{{userInfo.nickName || '点击设置昵称'}}" bindblur="onNicknameChange" placeholder="点击设置昵称" />
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">我的模板</text>
+      <text class="section-count">{{myTemplates.length}}个</text>
+    </view>
+
+    <!-- 模板列表 -->
+    <view wx:if="{{myTemplates.length > 0}}" class="template-list">
+      <template-card
+        wx:for="{{myTemplates}}"
+        wx:key="_id"
+        template="{{item}}"
+        showDelete="{{true}}"
+        bind:tap="onTemplateTap"
+        bind:delete="onDeleteTemplate"
+      />
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:elif="{{!loading}}" class="empty-state">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">还没有发布模板</text>
+      <text class="empty-hint">在行程详情中可以将清单发布为模板</text>
+    </view>
+
+    <!-- 加载中 -->
+    <view wx:if="{{loading}}" class="loading-state">
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="onLogout">退出登录</button>
+  </view>
+</view>

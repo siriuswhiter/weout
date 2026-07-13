@@ -1,0 +1,47 @@
+<view class="page">
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+
+  <view wx:else>
+    <!-- 模板信息 -->
+    <view class="template-header">
+      <view class="template-header__name">{{template.name}}</view>
+      <view class="template-header__creator" wx:if="{{creatorInfo}}">
+        <view class="creator-avatar" style="background-color: {{creatorInfo.color}}">{{creatorInfo.text}}</view>
+        <text class="creator-name">{{creatorInfo.nickName}}</text>
+      </view>
+      <view class="template-header__tags" wx:if="{{template.tags.length > 0}}">
+        <view wx:for="{{template.tags}}" wx:key="*this" class="tag tag-default">{{item}}</view>
+      </view>
+      <view class="template-header__stats">
+        <text>👍 {{template.likeCount || 0}}</text>
+        <text style="margin-left: 32rpx;">📥 {{template.useCount || 0}} 次使用</text>
+      </view>
+    </view>
+
+    <!-- Todo 项列表 -->
+    <view class="template-items">
+      <view class="section-title" style="padding: 0 32rpx;">清单内容（{{template.items.length}} 项）</view>
+      <view class="items-card">
+        <view
+          wx:for="{{template.items}}"
+          wx:key="index"
+          class="template-item"
+        >
+          <view class="template-item__circle">○</view>
+          <view class="template-item__content">{{item.content}}</view>
+          <view class="tag tag-warning" wx:if="{{item.assignType === 'all'}}" style="font-size: 20rpx; padding: 4rpx 12rpx;">所有人</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <button class="btn {{isLiked ? 'btn-liked' : 'btn-secondary'}}" bindtap="onToggleLike">
+        {{isLiked ? '❤️' : '🤍'}} {{template.likeCount || 0}}
+      </button>
+      <button class="btn btn-primary flex-1" bindtap="onUseTemplate">
+        一键使用
+      </button>
+    </view>
+  </view>
+</view>

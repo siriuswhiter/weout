@@ -1,0 +1,17 @@
+@import './styles/variables.wxss';
+@import './styles/common.wxss';
+
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  font-size: var(--font-md);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+view, text, navigator {
+  box-sizing: border-box;
+}

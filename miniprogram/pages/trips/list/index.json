@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "trip-card": "/components/trip-card/index"
+  },
+  "navigationBarTitleText": "一起走",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

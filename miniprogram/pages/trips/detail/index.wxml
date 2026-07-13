@@ -1,0 +1,81 @@
+<view class="page">
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+
+  <view wx:else>
+    <!-- 行程信息 -->
+    <view class="trip-info">
+      <view class="trip-info__meta">
+        <text wx:if="{{dateText}}">📅 {{dateText}}</text>
+        <text wx:if="{{trip.destination}}">  📍 {{trip.destination}}</text>
+        <text>  👥 {{members.length}}人</text>
+      </view>
+      <!-- 成员列表 -->
+      <view class="trip-info__members">
+        <view
+          wx:for="{{members}}"
+          wx:key="_id"
+          class="member-chip"
+        >
+          <view class="member-chip__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+          <text class="member-chip__name">{{item.nickName}}</text>
+        </view>
+        <view class="member-chip member-chip--add" bindtap="onInvite">
+          <view class="member-chip__avatar member-chip__avatar--add">+</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 筛选 Tab -->
+    <view class="filter-bar">
+      <view
+        class="filter-tab {{filter === 'all' ? 'filter-tab--active' : ''}}"
+        data-filter="all"
+        bindtap="onFilterChange"
+      >全部</view>
+      <view
+        class="filter-tab {{filter === 'mine' ? 'filter-tab--active' : ''}}"
+        data-filter="mine"
+        bindtap="onFilterChange"
+      >我的</view>
+      <view
+        class="filter-tab {{filter === 'undone' ? 'filter-tab--active' : ''}}"
+        data-filter="undone"
+        bindtap="onFilterChange"
+      >未完成</view>
+    </view>
+
+    <!-- Todo 列表 -->
+    <view class="todo-list">
+      <view class="empty-state" wx:if="{{filteredTodos.length === 0}}">
+        <view class="empty-state-icon">📝</view>
+        <view class="empty-state-text">暂无待办事项</view>
+      </view>
+
+      <view class="todo-list__card" wx:else>
+        <todo-item
+          wx:for="{{filteredTodos}}"
+          wx:key="_id"
+          todo="{{item}}"
+          members="{{members}}"
+          bind:toggle="onToggleTodo"
+          bind:delete="onDeleteTodo"
+        />
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <button class="btn btn-primary flex-1" bindtap="onShowAddModal">➕ 添加 Todo</button>
+      <button class="btn btn-secondary" bindtap="onUseTemplate">📋</button>
+    </view>
+
+    <!-- 添加 Todo 弹窗 -->
+    <add-todo-modal
+      wx:if="{{showAddModal}}"
+      show="{{showAddModal}}"
+      members="{{members}}"
+      bind:confirm="onAddTodo"
+      bind:close="onCloseAddModal"
+    />
+  </view>
+</view>

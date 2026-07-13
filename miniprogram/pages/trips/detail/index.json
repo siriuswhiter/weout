@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "todo-item": "/components/todo-item/index",
+    "add-todo-modal": "/components/add-todo-modal/index"
+  },
+  "navigationBarTitleText": "行程详情"
+}

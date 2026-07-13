@@ -1,0 +1,259 @@
+/* ========== 通用样式 ========== */
+
+/* 页面容器 */
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.page-content {
+  padding: var(--spacing-lg);
+}
+
+/* 卡片 */
+.card {
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 分组标题 */
+.section-title {
+  font-size: var(--font-sm);
+  color: var(--color-text-placeholder);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  padding-left: var(--spacing-xs);
+}
+
+/* 按钮 */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-md);
+  font-weight: 600;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  line-height: 1.4;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:active {
+  background-color: #0062cc;
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-gray);
+  color: var(--color-text);
+}
+
+.btn-secondary:active {
+  background-color: #e5e5e5;
+}
+
+.btn-small {
+  font-size: var(--font-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* 标签 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-round);
+  font-size: var(--font-sm);
+  line-height: 1.2;
+}
+
+.tag-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.tag-default {
+  background-color: var(--color-bg-gray);
+  color: var(--color-text-secondary);
+}
+
+.tag-warning {
+  background-color: var(--color-warning-light);
+  color: #e67700;
+}
+
+/* 头像 */
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-sm {
+  width: 40rpx;
+  height: 40rpx;
+  font-size: var(--font-xs);
+}
+
+.avatar-md {
+  width: 56rpx;
+  height: 56rpx;
+  font-size: var(--font-sm);
+}
+
+.avatar-lg {
+  width: 80rpx;
+  height: 80rpx;
+  font-size: var(--font-md);
+}
+
+.avatar-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 头像组 */
+.avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-group .avatar {
+  margin-left: -8rpx;
+  border: 2rpx solid #ffffff;
+}
+
+.avatar-group .avatar:first-child {
+  margin-left: 0;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.empty-state-icon {
+  font-size: 120rpx;
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state-text {
+  font-size: var(--font-md);
+  color: var(--color-text-placeholder);
+}
+
+.empty-state-action {
+  margin-top: var(--spacing-lg);
+}
+
+/* 输入框 */
+.input-field {
+  background-color: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  font-size: var(--font-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-label {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background-color: var(--color-border-light);
+}
+
+/* 弹性布局 */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/* 底部安全区 */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg-white);
+  border-top: 1rpx solid var(--color-border);
+  padding: var(--spacing-md) var(--spacing-lg);
+  padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom));
+  display: flex;
+  gap: var(--spacing-sm);
+  z-index: 100;
+}
+
+/* 遮罩层 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-placeholder);
+  font-size: var(--font-md);
+}

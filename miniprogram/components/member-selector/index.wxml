@@ -1,0 +1,21 @@
+<view class="member-selector">
+  <!-- 所有人 -->
+  <view
+    class="member-option {{assignType === 'all' ? 'member-option--active' : ''}}"
+    bindtap="onSelectAll"
+  >
+    <text>所有人</text>
+  </view>
+
+  <!-- 具体成员 -->
+  <view
+    wx:for="{{memberList}}"
+    wx:key="_id"
+    class="member-option {{item.selected ? 'member-option--active' : ''}}"
+    data-id="{{item._id}}"
+    bindtap="onSelectMember"
+  >
+    <view class="member-option__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+    <text>{{item.nickName}}</text>
+  </view>
+</view>

@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="form">
+    <!-- 模板名称 -->
+    <view class="form-group">
+      <view class="input-label">模板名称</view>
+      <input
+        class="input-field"
+        placeholder="给模板取个名字"
+        value="{{name}}"
+        bindinput="onNameInput"
+        maxlength="30"
+      />
+    </view>
+
+    <!-- 标签选择 -->
+    <view class="form-group">
+      <view class="input-label">标签（可多选）</view>
+      <view class="tags-wrap">
+        <view
+          wx:for="{{allTags}}"
+          wx:key="*this"
+          class="tag {{selectedTags.indexOf(item) > -1 ? 'tag-primary' : 'tag-default'}}"
+          data-tag="{{item}}"
+          bindtap="onTagTap"
+        >{{item}}</view>
+      </view>
+    </view>
+
+    <!-- 可见度 -->
+    <view class="form-group">
+      <view class="input-label">可见度</view>
+      <picker range="{{visibilityOptions}}" range-key="label" value="{{visibilityIndex}}" bindchange="onVisibilityChange">
+        <view class="input-field picker-field">
+          <text>{{visibilityOptions[visibilityIndex].label}}</text>
+          <text class="visibility-desc">{{visibilityOptions[visibilityIndex].desc}}</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- Todo 项选择 -->
+    <view class="form-group">
+      <view class="input-label">选择要发布的项目</view>
+      <view class="todo-select-list">
+        <view
+          wx:for="{{todos}}"
+          wx:key="_id"
+          class="todo-select-item {{item.selected ? 'todo-select-item--selected' : ''}}"
+          data-index="{{index}}"
+          bindtap="onToggleTodo"
+        >
+          <view class="todo-select-check">{{item.selected ? '☑' : '☐'}}</view>
+          <text class="todo-select-text">{{item.content}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提交 -->
+    <button
+      class="btn btn-primary btn-block submit-btn"
+      bindtap="onSubmit"
+      disabled="{{submitting || !name}}"
+    >
+      {{submitting ? '发布中...' : '发布模板'}}
+    </button>
+  </view>
+</view>

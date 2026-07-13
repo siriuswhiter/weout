@@ -1,0 +1,85 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  border-bottom: 1rpx solid var(--color-border-light);
+  gap: 16rpx;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item__check {
+  flex-shrink: 0;
+}
+
+.todo-item__circle {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 3rpx solid var(--color-text-disabled);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  color: transparent;
+}
+
+.todo-item__circle--done {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: #ffffff;
+}
+
+.todo-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-item__text {
+  font-size: var(--font-md);
+  color: var(--color-text);
+  word-break: break-all;
+}
+
+.todo-item__text--done {
+  text-decoration: line-through;
+  color: var(--color-text-placeholder);
+}
+
+.todo-item__meta {
+  margin-top: 4rpx;
+}
+
+.todo-item__due {
+  font-size: var(--font-xs);
+  color: var(--color-text-placeholder);
+}
+
+.todo-item__due.due-soon {
+  color: var(--color-warning);
+}
+
+.todo-item__due.overdue {
+  color: var(--color-danger);
+}
+
+.todo-item__assignee {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.todo-item__avatar {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18rpx;
+  font-weight: 600;
+}

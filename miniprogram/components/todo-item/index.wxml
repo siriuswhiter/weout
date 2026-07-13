@@ -1,0 +1,28 @@
+<view
+  class="todo-item"
+  bindtouchstart="onTouchStart"
+  bindtouchend="onTouchEnd"
+>
+  <!-- 完成按钮 -->
+  <view class="todo-item__check" bindtap="onToggle">
+    <view class="todo-item__circle {{todo.completed ? 'todo-item__circle--done' : ''}}">
+      <text wx:if="{{todo.completed}}">✓</text>
+    </view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="todo-item__content">
+    <view class="todo-item__text {{todo.completed ? 'todo-item__text--done' : ''}}">{{todo.content}}</view>
+    <view class="todo-item__meta" wx:if="{{dueDateText}}">
+      <text class="todo-item__due {{dueDateClass}}">📅 {{dueDateText}}</text>
+    </view>
+  </view>
+
+  <!-- 指派人 -->
+  <view class="todo-item__assignee">
+    <block wx:for="{{assigneeInfo}}" wx:key="text">
+      <view wx:if="{{item.isAll}}" class="tag tag-warning" style="font-size: 20rpx; padding: 4rpx 12rpx;">所有人</view>
+      <view wx:else class="todo-item__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,51 @@
+<view class="page">
+  <!-- 顶部标题栏 -->
+  <view class="header">
+    <view class="header__title">一起走</view>
+    <view class="header__actions">
+      <view class="header__btn" bindtap="onJoinByCode">加入</view>
+      <view class="header__btn header__btn--primary" bindtap="onCreateTrip">+ 新行程</view>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{isEmpty}}">
+    <view class="empty-state-icon">🎒</view>
+    <view class="empty-state-text">还没有行程</view>
+    <view class="empty-state-text" style="margin-top: 8rpx; font-size: 24rpx;">创建一个行程，开始准备出发吧</view>
+    <button class="btn btn-primary empty-state-action" bindtap="onCreateTrip">创建行程</button>
+  </view>
+
+  <!-- 行程列表 -->
+  <view class="page-content" wx:else>
+    <!-- 进行中 -->
+    <view wx:if="{{activeTrips.length > 0}}">
+      <view class="section-title">进行中</view>
+      <trip-card
+        wx:for="{{activeTrips}}"
+        wx:key="_id"
+        trip="{{item}}"
+        bind:tap="onTripTap"
+        bind:longpress="onTripLongPress"
+      />
+    </view>
+
+    <!-- 已结束 -->
+    <view wx:if="{{archivedTrips.length > 0}}" style="margin-top: 32rpx;">
+      <view class="section-title">已结束</view>
+      <trip-card
+        wx:for="{{archivedTrips}}"
+        wx:key="_id"
+        trip="{{item}}"
+        archived="{{true}}"
+        bind:tap="onTripTap"
+        bind:longpress="onTripLongPress"
+      />
+    </view>
+  </view>
+</view>

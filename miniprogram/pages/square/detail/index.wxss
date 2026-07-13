@@ -1,0 +1,89 @@
+.template-header {
+  background-color: var(--color-bg-white);
+  padding: 32rpx;
+  margin-bottom: 16rpx;
+}
+
+.template-header__name {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+}
+
+.template-header__creator {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.creator-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18rpx;
+  font-weight: 600;
+}
+
+.creator-name {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}
+
+.template-header__tags {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 16rpx;
+  flex-wrap: wrap;
+}
+
+.template-header__stats {
+  font-size: var(--font-sm);
+  color: var(--color-text-placeholder);
+  margin-top: 16rpx;
+}
+
+/* 清单内容 */
+.template-items {
+  padding: 16rpx 0;
+  padding-bottom: 160rpx;
+}
+
+.items-card {
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  margin: 12rpx 32rpx 0;
+  overflow: hidden;
+}
+
+.template-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  border-bottom: 1rpx solid var(--color-border-light);
+  gap: 16rpx;
+}
+
+.template-item:last-child {
+  border-bottom: none;
+}
+
+.template-item__circle {
+  color: var(--color-text-disabled);
+  font-size: var(--font-lg);
+  flex-shrink: 0;
+}
+
+.template-item__content {
+  flex: 1;
+  font-size: var(--font-md);
+}
+
+/* 点赞按钮 */
+.btn-liked {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+}

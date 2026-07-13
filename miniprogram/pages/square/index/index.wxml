@@ -1,0 +1,51 @@
+<view class="page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索模板..."
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+    </view>
+  </view>
+
+  <!-- 标签筛选 -->
+  <scroll-view class="tag-bar" scroll-x enable-flex>
+    <view
+      wx:for="{{tags}}"
+      wx:key="*this"
+      class="tag-item {{activeTag === item ? 'tag-item--active' : ''}}"
+      data-tag="{{item}}"
+      bindtap="onTagTap"
+    >{{item}}</view>
+  </scroll-view>
+
+  <!-- 模板列表 -->
+  <view class="page-content">
+    <view class="loading" wx:if="{{loading && templates.length === 0}}">加载中...</view>
+
+    <view class="empty-state" wx:elif="{{templates.length === 0}}">
+      <view class="empty-state-icon">📋</view>
+      <view class="empty-state-text">暂无模板</view>
+    </view>
+
+    <view wx:else>
+      <template-card
+        wx:for="{{templates}}"
+        wx:key="_id"
+        template="{{item}}"
+        showUseBtn="{{selectMode}}"
+        bind:tap="onTemplateTap"
+        bind:use="onTemplateUse"
+      />
+
+      <view class="loading" wx:if="{{loading}}">加载更多...</view>
+      <view class="list-end" wx:elif="{{!hasMore}}">— 没有更多了 —</view>
+    </view>
+  </view>
+</view>

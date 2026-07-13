@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "template-card": "/components/template-card/index"
+  },
+  "navigationBarTitleText": "广场",
+  "enablePullDownRefresh": true
+}

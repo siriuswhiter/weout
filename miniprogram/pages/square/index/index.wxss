@@ -1,0 +1,54 @@
+.search-bar {
+  background-color: var(--color-bg-white);
+  padding: 16rpx 32rpx 12rpx;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 16rpx 20rpx;
+}
+
+.search-icon {
+  font-size: var(--font-md);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  font-size: var(--font-md);
+}
+
+/* 标签栏 */
+.tag-bar {
+  white-space: nowrap;
+  padding: 16rpx 32rpx 8rpx;
+  display: flex;
+}
+
+.tag-item {
+  display: inline-block;
+  padding: 10rpx 28rpx;
+  border-radius: var(--radius-round);
+  font-size: var(--font-sm);
+  background-color: var(--color-bg-gray);
+  color: var(--color-text-secondary);
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.tag-item--active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.list-end {
+  text-align: center;
+  padding: var(--spacing-lg);
+  font-size: var(--font-sm);
+  color: var(--color-text-disabled);
+}
