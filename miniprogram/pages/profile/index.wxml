@@ -28,8 +28,8 @@
         wx:key="_id"
         template="{{item}}"
         showDelete="{{true}}"
-        bind:tap="onTemplateTap"
-        bind:delete="onDeleteTemplate"
+        bind:templatetap="onTemplateTap"
+        bind:templatedelete="onDeleteTemplate"
       />
     </view>
 

@@ -29,16 +29,16 @@ Component({
 
   methods: {
     onTap() {
-      this.triggerEvent('tap', { template: this.properties.template })
+      this.triggerEvent('templatetap', { template: this.properties.template })
     },
 
     onUse(e) {
       // 阻止冒泡到卡片点击
-      this.triggerEvent('use', { template: this.properties.template })
+      this.triggerEvent('templateuse', { template: this.properties.template })
     },
 
     onDelete(e) {
-      this.triggerEvent('delete', { template: this.properties.template })
+      this.triggerEvent('templatedelete', { template: this.properties.template })
     }
   }
 })

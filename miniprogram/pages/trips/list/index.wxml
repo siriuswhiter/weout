@@ -30,8 +30,8 @@
         wx:for="{{activeTrips}}"
         wx:key="_id"
         trip="{{item}}"
-        bind:tap="onTripTap"
-        bind:longpress="onTripLongPress"
+        bind:triptap="onTripTap"
+        bind:triplongpress="onTripLongPress"
       />
     </view>
 
@@ -43,8 +43,8 @@
         wx:key="_id"
         trip="{{item}}"
         archived="{{true}}"
-        bind:tap="onTripTap"
-        bind:longpress="onTripLongPress"
+        bind:triptap="onTripTap"
+        bind:triplongpress="onTripLongPress"
       />
     </view>
   </view>

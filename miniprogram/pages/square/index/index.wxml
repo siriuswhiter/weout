@@ -40,8 +40,8 @@
         wx:key="_id"
         template="{{item}}"
         showUseBtn="{{selectMode}}"
-        bind:tap="onTemplateTap"
-        bind:use="onTemplateUse"
+        bind:templatetap="onTemplateTap"
+        bind:templateuse="onTemplateUse"
       />
 
       <view class="loading" wx:if="{{loading}}">加载更多...</view>

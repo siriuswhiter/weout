@@ -44,11 +44,11 @@ Component({
 
   methods: {
     onTap() {
-      this.triggerEvent('tap', { trip: this.properties.trip })
+      this.triggerEvent('triptap', { trip: this.properties.trip })
     },
 
     onLongPress() {
-      this.triggerEvent('longpress', { trip: this.properties.trip })
+      this.triggerEvent('triplongpress', { trip: this.properties.trip })
     }
   }
 })
