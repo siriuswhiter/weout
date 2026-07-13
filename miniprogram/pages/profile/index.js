@@ -11,7 +11,10 @@ Page({
     loading: true
   },
 
-  onShow() {
+  async onShow() {
+    // 等待登录完成再加载数据
+    const app = getApp()
+    await app.getUserId()
     this.loadProfile()
   },
 

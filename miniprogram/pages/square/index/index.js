@@ -14,7 +14,7 @@ Page({
     tripId: ''
   },
 
-  onLoad(options) {
+  async onLoad(options) {
     if (options.selectMode === 'true' && options.tripId) {
       this.setData({
         selectMode: true,
@@ -22,6 +22,9 @@ Page({
       })
       wx.setNavigationBarTitle({ title: '选择模板' })
     }
+    // 等待登录完成再加载数据
+    const app = getApp()
+    await app.getUserId()
     this.loadTemplates()
   },
 

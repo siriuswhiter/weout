@@ -7,6 +7,8 @@ App({
       return
     }
     wx.cloud.init({
+      // TODO: 替换为你的云开发环境 ID，在云开发控制台获取
+      // env: 'your-env-id',
       traceUser: true
     })
 

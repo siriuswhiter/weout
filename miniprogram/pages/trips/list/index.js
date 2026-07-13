@@ -10,7 +10,10 @@ Page({
     isEmpty: false
   },
 
-  onLoad() {
+  async onLoad() {
+    // 等待登录完成再加载数据
+    const app = getApp()
+    await app.getUserId()
     this.loadTrips()
   },
 
