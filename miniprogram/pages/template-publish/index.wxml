@@ -48,7 +48,7 @@
           data-index="{{index}}"
           bindtap="onToggleTodo"
         >
-          <view class="todo-select-check">{{item.selected ? '☑' : '☐'}}</view>
+          <view class="todo-select-check"><view class="icon icon-md {{item.selected ? 'icon-check-square' : 'icon-square'}}"></view></view>
           <text class="todo-select-text">{{item.content}}</text>
         </view>
       </view>

@@ -2,7 +2,7 @@
   <!-- 搜索栏 -->
   <view class="search-bar">
     <view class="search-input-wrap">
-      <text class="search-icon">🔍</text>
+      <view class="search-icon icon icon-md icon-search"></view>
       <input
         class="search-input"
         placeholder="搜索模板..."
@@ -30,7 +30,7 @@
     <view class="loading" wx:if="{{loading && templates.length === 0}}">加载中...</view>
 
     <view class="empty-state" wx:elif="{{templates.length === 0}}">
-      <view class="empty-state-icon">📋</view>
+      <view class="empty-state-icon"><view class="icon icon-xxl icon-list-checks"></view></view>
       <view class="empty-state-text">暂无模板</view>
     </view>
 

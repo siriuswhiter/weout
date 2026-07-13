@@ -35,7 +35,7 @@
 
     <!-- 空状态 -->
     <view wx:elif="{{!loading}}" class="empty-state">
-      <text class="empty-icon">📋</text>
+      <view class="empty-icon"><view class="icon icon-xxl icon-list-checks"></view></view>
       <text class="empty-text">还没有发布模板</text>
       <text class="empty-hint">在行程详情中可以将清单发布为模板</text>
     </view>

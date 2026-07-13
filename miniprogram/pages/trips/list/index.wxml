@@ -15,7 +15,7 @@
 
   <!-- 空状态 -->
   <view class="empty-state" wx:elif="{{isEmpty}}">
-    <view class="empty-state-icon">🎒</view>
+    <view class="empty-state-icon"><view class="icon icon-xxl icon-backpack"></view></view>
     <view class="empty-state-text">还没有行程</view>
     <view class="empty-state-text" style="margin-top: 8rpx; font-size: 24rpx;">创建一个行程，开始准备出发吧</view>
     <button class="btn btn-primary empty-state-action" bindtap="onCreateTrip">创建行程</button>

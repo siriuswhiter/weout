@@ -5,9 +5,9 @@
     <!-- 行程信息 -->
     <view class="trip-info">
       <view class="trip-info__meta">
-        <text wx:if="{{dateText}}">📅 {{dateText}}</text>
-        <text wx:if="{{trip.destination}}">  📍 {{trip.destination}}</text>
-        <text>  👥 {{members.length}}人</text>
+        <text wx:if="{{dateText}}"><view class="icon icon-sm icon-calendar" style="margin-right: 4rpx;"></view> {{dateText}}</text>
+        <text wx:if="{{trip.destination}}">  <view class="icon icon-sm icon-map-pin" style="margin-right: 4rpx;"></view> {{trip.destination}}</text>
+        <text>  <view class="icon icon-sm icon-users" style="margin-right: 4rpx;"></view> {{members.length}}人</text>
       </view>
       <!-- 成员列表 -->
       <view class="trip-info__members">
@@ -47,7 +47,7 @@
     <!-- Todo 列表 -->
     <view class="todo-list">
       <view class="empty-state" wx:if="{{filteredTodos.length === 0}}">
-        <view class="empty-state-icon">📝</view>
+        <view class="empty-state-icon"><view class="icon icon-xxl icon-note-pencil"></view></view>
         <view class="empty-state-text">暂无待办事项</view>
       </view>
 
@@ -65,8 +65,8 @@
 
     <!-- 底部操作栏 -->
     <view class="bottom-bar">
-      <button class="btn btn-primary flex-1" bindtap="onShowAddModal">➕ 添加 Todo</button>
-      <button class="btn btn-secondary" bindtap="onUseTemplate">📋</button>
+      <button class="btn btn-primary flex-1" bindtap="onShowAddModal"><view class="icon icon-sm icon-plus" style="margin-right: 8rpx;"></view> 添加 Todo</button>
+      <button class="btn btn-secondary" bindtap="onUseTemplate"><view class="icon icon-sm icon-list-checks"></view></button>
     </view>
 
     <!-- 添加 Todo 弹窗 -->

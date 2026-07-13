@@ -40,7 +40,7 @@
             <text wx:else class="placeholder-text">选择日期</text>
           </view>
         </picker>
-        <view wx:if="{{dueDate}}" class="clear-btn" bindtap="onClearDueDate">✕</view>
+        <view wx:if="{{dueDate}}" class="clear-btn" bindtap="onClearDueDate"><view class="icon icon-sm icon-x"></view></view>
       </view>
     </view>
 

@@ -4,8 +4,8 @@
       <view class="template-card__name">{{template.name}}</view>
       <view class="template-card__preview">{{itemPreview}}</view>
       <view class="template-card__stats">
-        <text>👍 {{template.likeCount || 0}}</text>
-        <text style="margin-left: 24rpx;">📥 {{template.useCount || 0}}次使用</text>
+        <text><view class="icon icon-sm icon-thumbs-up" style="margin-right: 4rpx;"></view> {{template.likeCount || 0}}</text>
+        <text style="margin-left: 24rpx;"><view class="icon icon-sm icon-download" style="margin-right: 4rpx;"></view> {{template.useCount || 0}}次使用</text>
       </view>
     </view>
     <view class="template-card__action" wx:if="{{showUseBtn}}" catchtap="onUse">

@@ -1,5 +1,6 @@
 @import './styles/variables.wxss';
 @import './styles/common.wxss';
+@import './styles/icons.wxss';
 
 page {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',

@@ -5,16 +5,15 @@
 >
   <!-- 完成按钮 -->
   <view class="todo-item__check" bindtap="onToggle">
-    <view class="todo-item__circle {{todo.completed ? 'todo-item__circle--done' : ''}}">
-      <text wx:if="{{todo.completed}}">✓</text>
-    </view>
+    <view wx:if="{{todo.completed}}" class="icon icon-md icon-check-circle"></view>
+    <view wx:else class="icon icon-md icon-circle"></view>
   </view>
 
   <!-- 内容 -->
   <view class="todo-item__content">
     <view class="todo-item__text {{todo.completed ? 'todo-item__text--done' : ''}}">{{todo.content}}</view>
     <view class="todo-item__meta" wx:if="{{dueDateText}}">
-      <text class="todo-item__due {{dueDateClass}}">📅 {{dueDateText}}</text>
+      <text class="todo-item__due {{dueDateClass}}"><view class="icon icon-sm icon-calendar" style="margin-right: 4rpx;"></view> {{dueDateText}}</text>
     </view>
   </view>
 
