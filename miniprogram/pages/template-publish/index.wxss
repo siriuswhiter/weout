@@ -1,3 +1,5 @@
+/* ===== 模板发布页 ===== */
+
 .form {
   padding: var(--spacing-lg);
 }
@@ -21,20 +23,23 @@
 .visibility-desc {
   font-size: var(--font-sm);
   color: var(--color-text-placeholder);
+  margin-top: 8rpx;
 }
 
 .todo-select-list {
   background-color: var(--color-bg-white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
 .todo-select-item {
   display: flex;
   align-items: center;
   gap: 16rpx;
-  padding: 24rpx 20rpx;
+  padding: 24rpx 24rpx;
   border-bottom: 1rpx solid var(--color-border-light);
+  transition: background-color var(--transition-fast);
 }
 
 .todo-select-item:last-child {
@@ -54,10 +59,11 @@
 .todo-select-text {
   font-size: var(--font-md);
   flex: 1;
+  color: var(--color-text);
 }
 
 .submit-btn {
-  margin-top: var(--spacing-xl);
-  height: 88rpx;
-  line-height: 88rpx;
+  margin-top: var(--spacing-2xl);
+  height: 92rpx;
+  line-height: 92rpx;
 }

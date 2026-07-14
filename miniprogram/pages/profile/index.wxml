@@ -1,24 +1,30 @@
 <view class="page profile-page">
   <!-- 用户信息区域 -->
   <view class="profile-header">
-    <view class="avatar-wrapper">
-      <button class="avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-        <image wx:if="{{userInfo.avatarUrl}}" class="avatar-img" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
-        <view wx:else class="avatar-placeholder" style="background: {{avatarColor}}">
-          {{avatarText}}
+    <view class="profile-header__bg"></view>
+    <view class="profile-header__content">
+      <view class="avatar-wrapper">
+        <button class="avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+          <image wx:if="{{userInfo.avatarUrl}}" class="avatar-img" src="{{userInfo.avatarUrl}}" mode="aspectFill" />
+          <view wx:else class="avatar-placeholder" style="background: {{avatarColor}}">
+            {{avatarText}}
+          </view>
+        </button>
+        <view class="avatar-edit-hint">
+          <view class="icon icon-sm icon-note-pencil"></view>
         </view>
-      </button>
-    </view>
-    <view class="nickname-wrapper">
-      <input type="nickname" class="nickname-input" value="{{userInfo.nickName || '点击设置昵称'}}" bindblur="onNicknameChange" placeholder="点击设置昵称" />
+      </view>
+      <view class="nickname-wrapper">
+        <input type="nickname" class="nickname-input" value="{{userInfo.nickName || '点击设置昵称'}}" bindblur="onNicknameChange" placeholder="点击设置昵称" />
+      </view>
     </view>
   </view>
 
   <!-- 功能入口 -->
   <view class="section">
     <view class="section-header">
-      <text class="section-title">我的模板</text>
-      <text class="section-count">{{myTemplates.length}}个</text>
+      <text class="section__title">我的模板</text>
+      <view class="section-count-badge">{{myTemplates.length}}</view>
     </view>
 
     <!-- 模板列表 -->
@@ -35,14 +41,14 @@
 
     <!-- 空状态 -->
     <view wx:elif="{{!loading}}" class="empty-state">
-      <view class="empty-icon"><view class="icon icon-xxl icon-list-checks"></view></view>
-      <text class="empty-text">还没有发布模板</text>
-      <text class="empty-hint">在行程详情中可以将清单发布为模板</text>
+      <view class="empty-state-icon"><view class="icon icon-xxl icon-list-checks"></view></view>
+      <view class="empty-state-text">还没有发布模板</view>
+      <view class="empty-state-hint">在行程详情中可以将清单发布为模板</view>
     </view>
 
     <!-- 加载中 -->
-    <view wx:if="{{loading}}" class="loading-state">
-      <text class="loading-text">加载中...</text>
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
     </view>
   </view>
 

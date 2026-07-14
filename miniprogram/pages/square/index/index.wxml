@@ -32,6 +32,7 @@
     <view class="empty-state" wx:elif="{{templates.length === 0}}">
       <view class="empty-state-icon"><view class="icon icon-xxl icon-list-checks"></view></view>
       <view class="empty-state-text">暂无模板</view>
+      <view class="empty-state-hint">快去创建第一个模板吧</view>
     </view>
 
     <view wx:else>
@@ -45,7 +46,11 @@
       />
 
       <view class="loading" wx:if="{{loading}}">加载更多...</view>
-      <view class="list-end" wx:elif="{{!hasMore}}">— 没有更多了 —</view>
+      <view class="list-end" wx:elif="{{!hasMore}}">
+        <view class="list-end__line"></view>
+        <text class="list-end__text">没有更多了</text>
+        <view class="list-end__line"></view>
+      </view>
     </view>
   </view>
 </view>

@@ -1,3 +1,5 @@
+/* ===== 创建行程页 ===== */
+
 .form {
   padding: var(--spacing-lg);
 }
@@ -17,7 +19,7 @@
 }
 
 .submit-btn {
-  margin-top: var(--spacing-xl);
-  height: 88rpx;
-  line-height: 88rpx;
+  margin-top: var(--spacing-2xl);
+  height: 92rpx;
+  line-height: 92rpx;
 }

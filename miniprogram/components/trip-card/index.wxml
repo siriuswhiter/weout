@@ -1,12 +1,23 @@
 <view class="trip-card {{archived ? 'trip-card--archived' : ''}}" bindtap="onTap" bindlongpress="onLongPress">
+  <!-- 顶部装饰条 -->
+  <view class="trip-card__accent" wx:if="{{!archived}}"></view>
+  
   <view class="trip-card__body">
     <view class="trip-card__info">
       <view class="trip-card__name">{{trip.name}}</view>
-      <view class="trip-card__date"><view class="icon icon-sm icon-calendar" style="margin-right: 8rpx;"></view> {{dateText}}</view>
-      <view class="trip-card__destination" wx:if="{{trip.destination}}"><view class="icon icon-sm icon-map-pin" style="margin-right: 8rpx;"></view> {{trip.destination}}</view>
+      <view class="trip-card__meta">
+        <view class="trip-card__meta-item" wx:if="{{dateText}}">
+          <view class="icon icon-sm icon-calendar"></view>
+          <text>{{dateText}}</text>
+        </view>
+        <view class="trip-card__meta-item" wx:if="{{trip.destination}}">
+          <view class="icon icon-sm icon-map-pin"></view>
+          <text>{{trip.destination}}</text>
+        </view>
+      </view>
     </view>
     <view class="trip-card__right">
-      <view class="trip-card__progress" style="color: {{progressColor}}">{{progressText}}</view>
+      <view class="trip-card__progress" style="color: {{progressColor}}; background-color: {{progressBgColor}}">{{progressText}}</view>
       <view class="trip-card__members">
         <view
           wx:for="{{memberList}}"

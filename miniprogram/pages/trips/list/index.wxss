@@ -1,32 +1,56 @@
+/* ===== 行程列表页 ===== */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx 32rpx;
-  background-color: var(--color-bg-white);
-  border-bottom: 1rpx solid var(--color-border);
+  padding: 28rpx 32rpx 24rpx;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #6B8AFF 100%);
+}
+
+.header__left {
+  flex: 1;
 }
 
 .header__title {
-  font-size: 40rpx;
+  font-size: 44rpx;
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--color-text-inverse);
+  letter-spacing: 2rpx;
+}
+
+.header__subtitle {
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 4rpx;
 }
 
 .header__actions {
   display: flex;
-  gap: 16rpx;
+  gap: 12rpx;
 }
 
 .header__btn {
+  display: flex;
+  align-items: center;
   font-size: var(--font-sm);
-  padding: 10rpx 24rpx;
+  padding: 12rpx 24rpx;
   border-radius: var(--radius-round);
-  background-color: var(--color-bg-gray);
-  color: var(--color-text-secondary);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-inverse);
+  font-weight: 500;
+  backdrop-filter: blur(10rpx);
+  -webkit-backdrop-filter: blur(10rpx);
 }
 
 .header__btn--primary {
-  background-color: var(--color-primary);
-  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--color-primary);
+  font-weight: 600;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 已结束分区 */
+.archived-section {
+  margin-top: 40rpx;
 }

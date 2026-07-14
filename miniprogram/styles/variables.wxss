@@ -1,55 +1,75 @@
-/* ========== 样式变量 ========== */
+/* ========== 设计系统 - 一起出游 ========== */
+/* 风格: Soft UI + Flat Design 混合, 温暖友好的社交出游风格 */
 
-/* 主色调 */
 page {
-  --color-primary: #007aff;
-  --color-primary-light: #e8f4fd;
-  --color-success: #52c41a;
-  --color-success-light: #f0f7ee;
-  --color-warning: #ffa94d;
-  --color-warning-light: #fff3e0;
-  --color-danger: #ff4d4f;
-  --color-danger-light: #fff1f0;
+  /* ===== 品牌色 ===== */
+  --color-primary: #4F6EF7;          /* 活力蓝紫 - 主色调 */
+  --color-primary-dark: #3B55D9;     /* 深色态 */
+  --color-primary-light: #EEF1FE;    /* 浅底色 */
+  --color-primary-soft: #D6DDFB;     /* 柔和态 */
 
-  /* 文字颜色 */
-  --color-text: #333333;
-  --color-text-secondary: #666666;
-  --color-text-placeholder: #999999;
-  --color-text-disabled: #cccccc;
+  /* ===== 功能色 ===== */
+  --color-success: #34C759;          /* 完成绿 */
+  --color-success-light: #E8F8ED;
+  --color-warning: #FF9F0A;          /* 提醒橙 */
+  --color-warning-light: #FFF4E0;
+  --color-danger: #FF3B30;           /* 危险红 */
+  --color-danger-light: #FFEDED;
+  --color-accent: #FF6B6B;           /* 强调色 - 温暖珊瑚红 */
+  --color-accent-light: #FFF0F0;
 
-  /* 背景颜色 */
-  --color-bg: #f5f5f5;
-  --color-bg-white: #ffffff;
-  --color-bg-gray: #f0f0f0;
+  /* ===== 文字颜色 ===== */
+  --color-text: #1A1A2E;             /* 主文字 - 深色但不纯黑 */
+  --color-text-secondary: #6B7280;   /* 次要文字 */
+  --color-text-placeholder: #9CA3AF; /* 占位文字 */
+  --color-text-disabled: #D1D5DB;    /* 禁用文字 */
+  --color-text-inverse: #FFFFFF;     /* 反色文字 */
 
-  /* 边框 */
-  --color-border: #f0f0f0;
-  --color-border-light: #f5f5f5;
+  /* ===== 背景颜色 ===== */
+  --color-bg: #F4F5FA;               /* 页面背景 - 微蓝灰 */
+  --color-bg-white: #FFFFFF;         /* 卡片背景 */
+  --color-bg-gray: #F0F1F5;          /* 次级背景 */
+  --color-bg-elevated: #FFFFFF;      /* 浮层背景 */
 
-  /* 圆角 */
-  --radius-sm: 8rpx;
+  /* ===== 边框 ===== */
+  --color-border: #E8EAF0;           /* 主边框 */
+  --color-border-light: #F0F1F5;     /* 浅边框 */
+
+  /* ===== 圆角 ===== */
+  --radius-xs: 8rpx;
+  --radius-sm: 12rpx;
   --radius-md: 16rpx;
   --radius-lg: 24rpx;
   --radius-xl: 32rpx;
+  --radius-2xl: 40rpx;
   --radius-round: 999rpx;
 
-  /* 间距 */
+  /* ===== 间距 ===== */
   --spacing-xs: 8rpx;
   --spacing-sm: 16rpx;
   --spacing-md: 24rpx;
   --spacing-lg: 32rpx;
   --spacing-xl: 48rpx;
+  --spacing-2xl: 64rpx;
 
-  /* 字号 */
+  /* ===== 字号 ===== */
   --font-xs: 20rpx;
   --font-sm: 24rpx;
   --font-md: 28rpx;
   --font-lg: 32rpx;
   --font-xl: 36rpx;
   --font-xxl: 44rpx;
+  --font-display: 56rpx;
 
-  /* 阴影 */
-  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
+  /* ===== 阴影 ===== */
+  --shadow-xs: 0 1rpx 4rpx rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 2rpx 12rpx rgba(79, 110, 247, 0.06);
+  --shadow-md: 0 8rpx 24rpx rgba(79, 110, 247, 0.08);
+  --shadow-lg: 0 16rpx 48rpx rgba(79, 110, 247, 0.12);
+  --shadow-card: 0 4rpx 20rpx rgba(26, 26, 46, 0.05);
+
+  /* ===== 过渡 ===== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
 }

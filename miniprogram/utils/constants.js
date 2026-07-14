@@ -33,9 +33,9 @@ const INVITE_CODE_LENGTH = 6
 
 // 头像颜色列表
 const AVATAR_COLORS = [
-  '#007aff', '#ff6b6b', '#ffa94d', '#845ef7',
-  '#20c997', '#fd7e14', '#e64980', '#5c7cfa',
-  '#12b886', '#f06595'
+  '#4F6EF7', '#FF6B6B', '#FF9F0A', '#8B5CF6',
+  '#34C759', '#F97316', '#EC4899', '#6B8AFF',
+  '#14B8A6', '#F472B6'
 ]
 
 /**

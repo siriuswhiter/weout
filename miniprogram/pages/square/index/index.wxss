@@ -1,7 +1,8 @@
+/* ===== 广场页 ===== */
+
 .search-bar {
   background-color: var(--color-bg-white);
   padding: 16rpx 32rpx 12rpx;
-  border-bottom: 1rpx solid var(--color-border);
 }
 
 .search-input-wrap {
@@ -9,13 +10,20 @@
   align-items: center;
   gap: 12rpx;
   background-color: var(--color-bg);
-  border-radius: var(--radius-lg);
-  padding: 16rpx 20rpx;
+  border-radius: var(--radius-round);
+  padding: 16rpx 24rpx;
+  border: 2rpx solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.search-input-wrap:focus-within {
+  border-color: var(--color-primary-soft);
+  background-color: var(--color-bg-white);
 }
 
 .search-icon {
-  font-size: var(--font-md);
   flex-shrink: 0;
+  opacity: 0.5;
 }
 
 .search-input {
@@ -26,29 +34,49 @@
 /* 标签栏 */
 .tag-bar {
   white-space: nowrap;
-  padding: 16rpx 32rpx 8rpx;
+  padding: 16rpx 32rpx 12rpx;
   display: flex;
+  background-color: var(--color-bg-white);
+  border-bottom: 1rpx solid var(--color-border-light);
 }
 
 .tag-item {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 10rpx 28rpx;
   border-radius: var(--radius-round);
   font-size: var(--font-sm);
   background-color: var(--color-bg-gray);
   color: var(--color-text-secondary);
-  margin-right: 16rpx;
+  margin-right: 12rpx;
   flex-shrink: 0;
+  font-weight: 500;
+  transition: all var(--transition-fast);
 }
 
 .tag-item--active {
-  background-color: var(--color-primary);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #6B8AFF 100%);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4rpx 12rpx rgba(79, 110, 247, 0.25);
 }
 
+/* 列表底部 */
 .list-end {
-  text-align: center;
-  padding: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  gap: 16rpx;
+}
+
+.list-end__line {
+  flex: 1;
+  height: 1rpx;
+  background-color: var(--color-border);
+  max-width: 80rpx;
+}
+
+.list-end__text {
   font-size: var(--font-sm);
   color: var(--color-text-disabled);
 }

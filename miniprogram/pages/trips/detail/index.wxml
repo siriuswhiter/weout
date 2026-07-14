@@ -2,15 +2,24 @@
   <view class="loading" wx:if="{{loading}}">加载中...</view>
 
   <view wx:else>
-    <!-- 行程信息 -->
-    <view class="trip-info">
-      <view class="trip-info__meta">
-        <text wx:if="{{dateText}}"><view class="icon icon-sm icon-calendar" style="margin-right: 4rpx;"></view> {{dateText}}</text>
-        <text wx:if="{{trip.destination}}">  <view class="icon icon-sm icon-map-pin" style="margin-right: 4rpx;"></view> {{trip.destination}}</text>
-        <text>  <view class="icon icon-sm icon-users" style="margin-right: 4rpx;"></view> {{members.length}}人</text>
+    <!-- 行程信息头部 -->
+    <view class="trip-header">
+      <view class="trip-header__meta">
+        <view class="trip-header__meta-item" wx:if="{{dateText}}">
+          <view class="icon icon-sm icon-calendar"></view>
+          <text>{{dateText}}</text>
+        </view>
+        <view class="trip-header__meta-item" wx:if="{{trip.destination}}">
+          <view class="icon icon-sm icon-map-pin"></view>
+          <text>{{trip.destination}}</text>
+        </view>
+        <view class="trip-header__meta-item">
+          <view class="icon icon-sm icon-users"></view>
+          <text>{{members.length}}人</text>
+        </view>
       </view>
       <!-- 成员列表 -->
-      <view class="trip-info__members">
+      <view class="trip-header__members">
         <view
           wx:for="{{members}}"
           wx:key="_id"
@@ -20,7 +29,9 @@
           <text class="member-chip__name">{{item.nickName}}</text>
         </view>
         <view class="member-chip member-chip--add" bindtap="onInvite">
-          <view class="member-chip__avatar member-chip__avatar--add">+</view>
+          <view class="member-chip__avatar member-chip__avatar--add">
+            <view class="icon icon-sm icon-plus"></view>
+          </view>
         </view>
       </view>
     </view>
@@ -49,6 +60,7 @@
       <view class="empty-state" wx:if="{{filteredTodos.length === 0}}">
         <view class="empty-state-icon"><view class="icon icon-xxl icon-note-pencil"></view></view>
         <view class="empty-state-text">暂无待办事项</view>
+        <view class="empty-state-hint">点击下方按钮添加</view>
       </view>
 
       <view class="todo-list__card" wx:else>
@@ -65,8 +77,13 @@
 
     <!-- 底部操作栏 -->
     <view class="bottom-bar">
-      <button class="btn btn-primary flex-1" bindtap="onShowAddModal"><view class="icon icon-sm icon-plus" style="margin-right: 8rpx;"></view> 添加 Todo</button>
-      <button class="btn btn-secondary" bindtap="onUseTemplate"><view class="icon icon-sm icon-list-checks"></view></button>
+      <button class="btn btn-primary flex-1" bindtap="onShowAddModal">
+        <view class="icon icon-sm icon-plus" style="margin-right: 8rpx;"></view>
+        添加待办
+      </button>
+      <button class="btn btn-secondary" bindtap="onUseTemplate">
+        <view class="icon icon-sm icon-list-checks"></view>
+      </button>
     </view>
 
     <!-- 添加 Todo 弹窗 -->

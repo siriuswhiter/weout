@@ -1,8 +1,15 @@
+/* ===== 模板卡片 ===== */
+
 .template-card {
   background-color: var(--color-bg-white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   padding: 28rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-fast);
+}
+
+.template-card:active {
   box-shadow: var(--shadow-sm);
 }
 
@@ -21,21 +28,31 @@
   font-size: var(--font-lg);
   font-weight: 600;
   color: var(--color-text);
+  line-height: 1.3;
 }
 
 .template-card__preview {
   font-size: var(--font-sm);
   color: var(--color-text-placeholder);
-  margin-top: 8rpx;
+  margin-top: 10rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 1.4;
 }
 
 .template-card__stats {
-  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
   color: var(--color-text-placeholder);
-  margin-top: 12rpx;
+  margin-top: 14rpx;
+  gap: 24rpx;
+}
+
+.template-card__stats text {
+  display: flex;
+  align-items: center;
 }
 
 .template-card__action {
@@ -45,7 +62,11 @@
 }
 
 .btn-danger {
-  background: #fff;
-  color: #e74c3c;
-  border: 2rpx solid #f5d5d5;
+  background: var(--color-bg-white);
+  color: var(--color-danger);
+  border: 2rpx solid var(--color-danger-light);
+}
+
+.btn-danger:active {
+  background-color: var(--color-danger-light);
 }

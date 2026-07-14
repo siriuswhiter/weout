@@ -19,7 +19,8 @@ Component({
     dateText: '',
     memberList: [],
     progressText: '',
-    progressColor: ''
+    progressColor: '',
+    progressBgColor: ''
   },
 
   observers: {
@@ -35,10 +36,20 @@ Component({
       }))
 
       const stats = trip.todoStats || { total: 0, completed: 0 }
-      const progressText = stats.total > 0 ? `${stats.completed}/${stats.total} 完成` : '暂无待办'
-      const progressColor = stats.total > 0 && stats.completed === stats.total ? '#52c41a' : '#007aff'
+      const progressText = stats.total > 0 ? `${stats.completed}/${stats.total}` : '暂无待办'
+      let progressColor, progressBgColor
+      if (stats.total > 0 && stats.completed === stats.total) {
+        progressColor = '#16A34A'
+        progressBgColor = '#E8F8ED'
+      } else if (stats.total > 0) {
+        progressColor = '#4F6EF7'
+        progressBgColor = '#EEF1FE'
+      } else {
+        progressColor = '#9CA3AF'
+        progressBgColor = '#F0F1F5'
+      }
 
-      this.setData({ dateText, memberList: members, progressText, progressColor })
+      this.setData({ dateText, memberList: members, progressText, progressColor, progressBgColor })
     }
   },
 
