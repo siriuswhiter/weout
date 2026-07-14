@@ -1,0 +1,34 @@
+<view class="welcome-overlay" wx:if="{{show}}" catchtap="preventBubble">
+  <view class="welcome-modal" catchtap="preventBubble">
+    <view class="welcome-title">欢迎使用一起出游</view>
+    <view class="welcome-desc">设置你的昵称和头像，方便小伙伴认出你</view>
+
+    <!-- 头像选择 -->
+    <view class="welcome-avatar-wrap">
+      <button class="welcome-avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image wx:if="{{avatarUrl}}" class="welcome-avatar-img" src="{{avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="welcome-avatar-placeholder">
+          <view class="welcome-avatar-plus">+</view>
+          <view class="welcome-avatar-hint">选择头像</view>
+        </view>
+      </button>
+    </view>
+
+    <!-- 昵称输入 -->
+    <view class="welcome-input-wrap">
+      <input
+        type="nickname"
+        class="welcome-input"
+        placeholder="输入你的昵称"
+        bindinput="onNicknameInput"
+        value="{{nickName}}"
+      />
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="welcome-actions">
+      <button class="welcome-btn welcome-btn--primary" bindtap="onConfirm">开始使用</button>
+      <view class="welcome-skip" bindtap="onSkip">稍后设置</view>
+    </view>
+  </view>
+</view>

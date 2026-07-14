@@ -12,6 +12,8 @@
 
 .todo-item__check {
   flex-shrink: 0;
+  padding: 8rpx;
+  margin: -8rpx;
 }
 
 .todo-item__circle {

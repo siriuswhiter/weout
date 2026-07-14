@@ -1,7 +1,7 @@
 <view class="page">
   <!-- 顶部标题栏 -->
   <view class="header">
-    <view class="header__title">一起走</view>
+    <view class="header__title">一起出游</view>
     <view class="header__actions">
       <view class="header__btn" bindtap="onJoinByCode">加入</view>
       <view class="header__btn header__btn--primary" bindtap="onCreateTrip">+ 新行程</view>
@@ -48,4 +48,7 @@
       />
     </view>
   </view>
+
+  <!-- 首次使用欢迎引导 -->
+  <welcome-modal show="{{showWelcome}}" bind:done="onWelcomeDone" />
 </view>

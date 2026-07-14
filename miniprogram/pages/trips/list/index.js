@@ -7,7 +7,8 @@ Page({
     activeTrips: [],
     archivedTrips: [],
     loading: true,
-    isEmpty: false
+    isEmpty: false,
+    showWelcome: false
   },
 
   async onLoad() {
@@ -15,6 +16,15 @@ Page({
     const app = getApp()
     await app.getUserId()
     this.loadTrips()
+
+    // 首次使用，显示欢迎引导
+    if (!wx.getStorageSync('yqz_welcome_done')) {
+      this.setData({ showWelcome: true })
+    }
+  },
+
+  onWelcomeDone() {
+    this.setData({ showWelcome: false })
   },
 
   onShow() {

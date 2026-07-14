@@ -1,8 +1,9 @@
 {
   "usingComponents": {
-    "trip-card": "/components/trip-card/index"
+    "trip-card": "/components/trip-card/index",
+    "welcome-modal": "/components/welcome-modal/index"
   },
-  "navigationBarTitleText": "一起走",
+  "navigationBarTitleText": "一起出游",
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark"
 }
