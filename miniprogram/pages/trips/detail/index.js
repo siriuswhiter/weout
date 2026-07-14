@@ -11,6 +11,8 @@ Page({
     todos: [],
     filteredTodos: [],
     filter: 'all', // all | mine | undone
+    tagFilter: '',  // 空字符串表示全部标签
+    todoTags: [],   // 动态从 todos 中提取
     loading: true,
     showAddModal: false,
     dateText: ''
@@ -89,35 +91,85 @@ Page({
     }
   },
 
-  // 筛选
+  // 状态筛选
   onFilterChange(e) {
     const filter = e.currentTarget.dataset.filter
     this.setData({ filter })
     this.applyFilter()
   },
 
+  // 标签筛选
+  onTagFilterChange(e) {
+    const tag = e.currentTarget.dataset.tag
+    // 点击已选中的标签则取消筛选
+    this.setData({ tagFilter: this.data.tagFilter === tag ? '' : tag })
+    this.applyFilter()
+  },
+
   applyFilter() {
-    const { todos, filter } = this.data
+    const { todos, filter, tagFilter } = this.data
     const app = getApp()
     const userId = app.globalData.userId
 
+    // 动态提取当前 todos 中的所有标签（去重，兼容旧 tag 和新 tags）
+    const tagSet = new Set()
+    todos.forEach(t => {
+      if (t.tags && t.tags.length > 0) {
+        t.tags.forEach(tag => tagSet.add(tag))
+      } else if (t.tag) {
+        tagSet.add(t.tag)
+      }
+    })
+    const todoTags = Array.from(tagSet).sort()
+
+    // 如果当前选中的标签已不存在于 todos 中，自动重置
+    const validTagFilter = tagFilter && tagSet.has(tagFilter) ? tagFilter : ''
+    if (validTagFilter !== tagFilter) {
+      this.setData({ tagFilter: validTagFilter })
+    }
+
     let filtered = todos
+
+    // 状态筛选
     switch (filter) {
       case 'mine':
-        filtered = todos.filter(t =>
+        filtered = filtered.filter(t =>
           t.assignType === 'all' || (t.assigneeIds && t.assigneeIds.includes(userId))
         )
         break
       case 'undone':
-        filtered = todos.filter(t => !t.completed)
+        filtered = filtered.filter(t => !t.completed)
         break
     }
 
-    this.setData({ filteredTodos: filtered })
+    // 标签筛选（兼容旧 tag 和新 tags）
+    if (validTagFilter) {
+      filtered = filtered.filter(t => {
+        if (t.tags && t.tags.length > 0) {
+          return t.tags.includes(validTagFilter)
+        }
+        return t.tag === validTagFilter
+      })
+    }
+
+    // 按优先级排序：紧急 > 重要 > 普通，已完成的沉底
+    const priorityOrder = { urgent: 0, high: 1, normal: 2 }
+    filtered = filtered.slice().sort((a, b) => {
+      // 已完成的排最后
+      if (a.completed !== b.completed) return a.completed ? 1 : -1
+      // 按优先级排序
+      const pa = priorityOrder[a.priority] ?? 2
+      const pb = priorityOrder[b.priority] ?? 2
+      return pa - pb
+    })
+
+    this.setData({ filteredTodos: filtered, todoTags })
   },
 
   // 添加 Todo
   onShowAddModal() {
+    const modal = this.selectComponent('#addTodoModal')
+    if (modal) modal.resetForm()
     this.setData({ showAddModal: true })
   },
 
@@ -125,18 +177,36 @@ Page({
     this.setData({ showAddModal: false })
   },
 
-  async onAddTodo(e) {
-    const todoData = e.detail
+  // 长按编辑 Todo
+  onEditTodo(e) {
+    const { todo } = e.detail
+    const modal = this.selectComponent('#addTodoModal')
+    if (modal) modal.setEditData(todo)
+    this.setData({ showAddModal: true })
+  },
+
+  // 统一处理新增和编辑
+  async onConfirmTodo(e) {
+    const data = e.detail
     try {
-      await api.createTodo({
-        tripId: this.data.tripId,
-        ...todoData
-      })
-      this.setData({ showAddModal: false })
-      wx.showToast({ title: '添加成功', icon: 'success' })
+      if (data.todoId) {
+        // 编辑模式
+        const { todoId, ...updateData } = data
+        await api.updateTodo(todoId, updateData)
+        this.setData({ showAddModal: false })
+        wx.showToast({ title: '修改成功', icon: 'success' })
+      } else {
+        // 新增模式
+        await api.createTodo({
+          tripId: this.data.tripId,
+          ...data
+        })
+        this.setData({ showAddModal: false })
+        wx.showToast({ title: '添加成功', icon: 'success' })
+      }
       this.loadTodos()
     } catch (err) {
-      wx.showToast({ title: '添加失败', icon: 'none' })
+      wx.showToast({ title: '操作失败', icon: 'none' })
     }
   },
 
@@ -180,9 +250,50 @@ Page({
     wx.navigateTo({ url: `/pages/trips/invite/index?id=${this.data.tripId}` })
   },
 
-  // 使用模板
-  onUseTemplate() {
-    wx.navigateTo({ url: `/pages/square/index/index?tripId=${this.data.tripId}&selectMode=true` })
+  // 更多操作
+  onShowMore() {
+    const items = ['使用模板']
+    if (this.data.todos.length > 0) {
+      items.push('发布为模板')
+    }
+    items.push('归档行程')
+
+    wx.showActionSheet({
+      itemList: items,
+      success: (res) => {
+        const action = items[res.tapIndex]
+        switch (action) {
+          case '使用模板':
+            wx.navigateTo({ url: `/pages/square/index/index?tripId=${this.data.tripId}&selectMode=true` })
+            break
+          case '发布为模板':
+            wx.navigateTo({ url: `/pages/template-publish/index?tripId=${this.data.tripId}` })
+            break
+          case '归档行程':
+            this.onArchiveTrip()
+            break
+        }
+      }
+    })
+  },
+
+  // 归档行程
+  onArchiveTrip() {
+    wx.showModal({
+      title: '归档行程',
+      content: '归档后行程将移至历史记录',
+      success: async (res) => {
+        if (res.confirm) {
+          try {
+            await api.archiveTrip(this.data.tripId)
+            wx.showToast({ title: '已归档', icon: 'success' })
+            setTimeout(() => wx.navigateBack(), 500)
+          } catch (err) {
+            wx.showToast({ title: '操作失败', icon: 'none' })
+          }
+        }
+      }
+    })
   },
 
   // 分享

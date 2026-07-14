@@ -5,7 +5,7 @@
       <view class="modal-sheet__bar"></view>
     </view>
 
-    <view class="modal-sheet__title">添加待办</view>
+    <view class="modal-sheet__title">{{isEdit ? '编辑待办' : '添加待办'}}</view>
 
     <!-- 内容输入 -->
     <view class="form-group">
@@ -17,6 +17,52 @@
         focus="{{show}}"
         maxlength="100"
       />
+    </view>
+
+    <!-- 标签输入 -->
+    <view class="form-group">
+      <view class="input-label">标签（可选，输入后按回车添加）</view>
+      <view class="tags-input-wrap">
+        <view wx:for="{{tags}}" wx:key="*this" class="tag-chip">
+          <text class="tag-chip__text">{{item}}</text>
+          <view class="tag-chip__remove" data-index="{{index}}" bindtap="onRemoveTag">×</view>
+        </view>
+        <input
+          class="tags-input"
+          placeholder="{{tags.length > 0 ? '继续添加...' : '输入标签，如：美食、交通...'}}"
+          value="{{tagInput}}"
+          bindinput="onTagInput"
+          bindconfirm="onTagConfirm"
+          maxlength="20"
+        />
+      </view>
+      <!-- 选择已有标签 -->
+      <view wx:if="{{existingTags.length > 0}}" class="existing-tags">
+        <view class="existing-tags__label">选择已有标签</view>
+        <view class="existing-tags__list">
+          <view
+            wx:for="{{existingTags}}"
+            wx:key="*this"
+            class="existing-tag {{tags.indexOf(item) > -1 ? 'existing-tag--active' : ''}}"
+            data-tag="{{item}}"
+            bindtap="onSelectExistingTag"
+          >{{item}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 优先级 -->
+    <view class="form-group">
+      <view class="input-label">重要程度</view>
+      <view class="priority-wrap">
+        <view
+          wx:for="{{todoPriorities}}"
+          wx:key="value"
+          class="priority-option {{priority === item.value ? 'priority-option--active' : ''}} priority-option--{{item.value}}"
+          data-value="{{item.value}}"
+          bindtap="onPriorityTap"
+        >{{item.label}}</view>
+      </view>
     </view>
 
     <!-- 指派人 -->
@@ -59,7 +105,7 @@
 
     <!-- 确认按钮 -->
     <button class="btn btn-primary btn-block confirm-btn" bindtap="onConfirm" disabled="{{!content}}">
-      确认添加
+      {{isEdit ? '保存修改' : '确认添加'}}
     </button>
   </view>
 </view>

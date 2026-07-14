@@ -10,6 +10,20 @@ const VISIBILITY_OPTIONS = [
   { label: '私有', value: 'private', desc: '仅自己可见' }
 ]
 
+// 模板审核状态
+const TEMPLATE_STATUS = {
+  PENDING: 'pending',     // 待审核
+  APPROVED: 'approved',   // 已通过
+  REJECTED: 'rejected'    // 已拒绝
+}
+
+// 审核状态显示配置
+const TEMPLATE_STATUS_MAP = {
+  pending: { label: '待审核', color: '#FF9F0A' },
+  approved: { label: '已通过', color: '#34C759' },
+  rejected: { label: '已拒绝', color: '#FF6B6B' }
+}
+
 // 行程状态
 const TRIP_STATUS = {
   ACTIVE: 'active',
@@ -21,6 +35,13 @@ const ASSIGN_TYPE = {
   ALL: 'all',
   SPECIFIC: 'specific'
 }
+
+// Todo 优先级
+const TODO_PRIORITIES = [
+  { label: '普通', value: 'normal', color: '' },
+  { label: '重要', value: 'high', color: '#FF9F0A' },
+  { label: '紧急', value: 'urgent', color: '#FF6B6B' }
+]
 
 // 轮询间隔（毫秒）
 const POLLING_INTERVAL = 15000
@@ -61,8 +82,11 @@ function getAvatarText(nickName) {
 module.exports = {
   TEMPLATE_TAGS,
   VISIBILITY_OPTIONS,
+  TEMPLATE_STATUS,
+  TEMPLATE_STATUS_MAP,
   TRIP_STATUS,
   ASSIGN_TYPE,
+  TODO_PRIORITIES,
   POLLING_INTERVAL,
   CACHE_EXPIRY,
   INVITE_CODE_LENGTH,

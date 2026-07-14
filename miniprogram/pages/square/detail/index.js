@@ -97,20 +97,43 @@ Page({
         const tripsRes = await api.listTrips()
         const activeTrips = (tripsRes.trips || []).filter(t => t.status === 'active')
 
-        if (activeTrips.length === 0) {
-          wx.showToast({ title: '请先创建一个行程', icon: 'none' })
-          return
-        }
+        // 第一项是"创建新行程"，后面是已有行程
+        const items = ['+ 创建新行程', ...activeTrips.map(t => t.name)]
 
         wx.showActionSheet({
-          itemList: activeTrips.map(t => t.name),
+          itemList: items,
           success: async (res) => {
-            const selectedTrip = activeTrips[res.tapIndex]
-            try {
-              await api.useTemplate(templateId, selectedTrip._id)
-              wx.showToast({ title: '添加成功', icon: 'success' })
-            } catch (err) {
-              wx.showToast({ title: '添加失败', icon: 'none' })
+            if (res.tapIndex === 0) {
+              // 创建新行程 — 让用户输入行程名
+              wx.showModal({
+                title: '新建行程',
+                editable: true,
+                placeholderText: '输入行程名称',
+                content: template.name,
+                success: async (modalRes) => {
+                  if (modalRes.confirm && modalRes.content && modalRes.content.trim()) {
+                    try {
+                      const tripRes = await api.createTrip({ name: modalRes.content.trim() })
+                      await api.useTemplate(templateId, tripRes.tripId)
+                      wx.showToast({ title: '创建成功', icon: 'success' })
+                      setTimeout(() => {
+                        wx.redirectTo({ url: `/pages/trips/detail/index?id=${tripRes.tripId}` })
+                      }, 500)
+                    } catch (err) {
+                      wx.showToast({ title: '创建失败', icon: 'none' })
+                    }
+                  }
+                }
+              })
+            } else {
+              // 添加到已有行程
+              const selectedTrip = activeTrips[res.tapIndex - 1]
+              try {
+                await api.useTemplate(templateId, selectedTrip._id)
+                wx.showToast({ title: '添加成功', icon: 'success' })
+              } catch (err) {
+                wx.showToast({ title: '添加失败', icon: 'none' })
+              }
             }
           }
         })

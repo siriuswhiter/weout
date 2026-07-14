@@ -41,3 +41,10 @@
   font-size: 18rpx;
   font-weight: 600;
 }
+
+.member-option__avatar-img {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

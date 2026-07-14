@@ -1,18 +1,50 @@
 <view class="template-card" bindtap="onTap">
   <view class="template-card__body">
     <view class="template-card__info">
-      <view class="template-card__name">{{template.name}}</view>
+      <view class="template-card__name-row">
+        <view class="template-card__name">{{template.name}}</view>
+        <view wx:if="{{showStatus && template.status}}" class="template-card__status" style="background: {{statusColor}}20; color: {{statusColor}};">
+          {{statusLabel}}
+        </view>
+      </view>
+      <!-- 描述 -->
+      <view wx:if="{{template.description}}" class="template-card__desc">{{template.description}}</view>
+      <!-- 标签 -->
+      <view wx:if="{{template.tags && template.tags.length > 0}}" class="template-card__tags">
+        <view wx:for="{{template.tags}}" wx:key="*this" class="template-card__tag">{{item}}</view>
+      </view>
       <view class="template-card__preview">{{itemPreview}}</view>
+      <!-- 被拒绝时显示原因 -->
+      <view wx:if="{{showStatus && template.status === 'rejected' && template.reviewNote}}" class="template-card__reject-note">
+        拒绝原因：{{template.reviewNote}}
+      </view>
+      <!-- 审核模式显示创建者 -->
+      <view wx:if="{{showReview && template.creator}}" class="template-card__creator">
+        <text>发布者：{{template.creator.nickName || '旅行者'}}</text>
+      </view>
       <view class="template-card__stats">
         <text><view class="icon icon-sm icon-thumbs-up" style="margin-right: 4rpx;"></view> {{template.likeCount || 0}}</text>
         <text style="margin-left: 24rpx;"><view class="icon icon-sm icon-download" style="margin-right: 4rpx;"></view> {{template.useCount || 0}}次使用</text>
       </view>
     </view>
-    <view class="template-card__action" wx:if="{{showUseBtn}}" catchtap="onUse">
-      <view class="btn btn-primary btn-small">使用</view>
-    </view>
-    <view class="template-card__action" wx:if="{{showDelete}}" catchtap="onDelete">
-      <view class="btn btn-danger btn-small">删除</view>
+    <view class="template-card__actions">
+      <view class="template-card__action" wx:if="{{showUseBtn}}" catchtap="onUse">
+        <view class="btn btn-primary btn-small">使用</view>
+      </view>
+      <view class="template-card__action" wx:if="{{showDelete}}" catchtap="onDelete">
+        <view class="btn btn-danger btn-small">删除</view>
+      </view>
+      <!-- 审核操作按钮 -->
+      <view class="template-card__review-actions" wx:if="{{showReview}}">
+        <view class="btn btn-approve btn-small" catchtap="onApprove">通过</view>
+        <view class="btn btn-reject btn-small" catchtap="onReject">拒绝</view>
+      </view>
+      <!-- 管理操作按钮 -->
+      <view class="template-card__review-actions" wx:if="{{showManage}}">
+        <view wx:if="{{template.status === 'approved'}}" class="btn btn-reject btn-small" catchtap="onUnpublish">下线</view>
+        <view wx:else class="btn btn-approve btn-small" catchtap="onPublish">上架</view>
+        <view class="btn btn-danger btn-small" catchtap="onManageDelete">删除</view>
+      </view>
     </view>
   </view>
 </view>

@@ -1,0 +1,97 @@
+<view class="page review-page">
+  <view class="review-header">
+    <view class="review-header__title">模板管理</view>
+    <view class="review-header__desc">审核待发布模板，管理广场已上线的全部模板</view>
+    <view class="review-header__actions">
+      <button class="btn btn-outline btn-small seed-btn" bindtap="onSeedPresets" loading="{{seeding}}" disabled="{{seeding}}">
+        初始化预置模板
+      </button>
+      <button class="btn btn-outline btn-small seed-btn" bindtap="onForceSeedPresets" loading="{{seeding}}" disabled="{{seeding}}">
+        更新预置模板
+      </button>
+    </view>
+  </view>
+
+  <!-- Tab 切换 -->
+  <view class="mgmt-tabs">
+    <view class="mgmt-tab {{tab === 'pending' ? 'mgmt-tab--active' : ''}}" data-tab="pending" bindtap="onTabChange">
+      待审核
+      <text wx:if="{{pendingCount > 0}}" class="mgmt-tab__badge">{{pendingCount}}</text>
+    </view>
+    <view class="mgmt-tab {{tab === 'all' ? 'mgmt-tab--active' : ''}}" data-tab="all" bindtap="onTabChange">
+      全部模板
+    </view>
+  </view>
+
+  <!-- 全部模板：搜索 + 状态筛选 -->
+  <view wx:if="{{tab === 'all'}}" class="mgmt-toolbar">
+    <view class="mgmt-search">
+      <input
+        class="mgmt-search__input"
+        placeholder="搜索模板名称"
+        value="{{keyword}}"
+        bindinput="onKeywordInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+    </view>
+    <view class="mgmt-filters">
+      <view
+        wx:for="{{statusFilters}}"
+        wx:key="value"
+        class="mgmt-filter {{statusFilter === item.value ? 'mgmt-filter--active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="onStatusFilterChange"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <!-- ===== 待审核列表 ===== -->
+  <block wx:if="{{tab === 'pending'}}">
+    <view wx:if="{{templates.length > 0}}" class="review-list">
+      <template-card
+        wx:for="{{templates}}"
+        wx:key="_id"
+        template="{{item}}"
+        showStatus="{{true}}"
+        showReview="{{true}}"
+        bind:templatetap="onTemplateTap"
+        bind:templateapprove="onApprove"
+        bind:templatereject="onReject"
+      />
+    </view>
+    <view wx:elif="{{!loading}}" class="empty-state">
+      <view class="empty-state-icon"><view class="icon icon-xxl icon-shield-check"></view></view>
+      <view class="empty-state-text">暂无待审核模板</view>
+      <view class="empty-state-hint">所有模板都已处理完毕</view>
+    </view>
+  </block>
+
+  <!-- ===== 全部模板列表 ===== -->
+  <block wx:if="{{tab === 'all'}}">
+    <view wx:if="{{allTemplates.length > 0}}" class="review-list">
+      <template-card
+        wx:for="{{allTemplates}}"
+        wx:key="_id"
+        template="{{item}}"
+        showStatus="{{true}}"
+        showReview="{{false}}"
+        showManage="{{true}}"
+        bind:templatetap="onTemplateTap"
+        bind:templatepublish="onPublish"
+        bind:templateunpublish="onUnpublish"
+        bind:templatemanagedelete="onManageDelete"
+      />
+    </view>
+    <view wx:elif="{{!loading}}" class="empty-state">
+      <view class="empty-state-icon"><view class="icon icon-xxl icon-list-checks"></view></view>
+      <view class="empty-state-text">暂无模板</view>
+      <view class="empty-state-hint">可尝试切换筛选条件或初始化预置模板</view>
+    </view>
+  </block>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+</view>

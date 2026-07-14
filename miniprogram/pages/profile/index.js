@@ -8,7 +8,9 @@ Page({
     avatarColor: '',
     avatarText: '',
     myTemplates: [],
-    loading: true
+    loading: true,
+    isAdmin: false,
+    pendingCount: 0
   },
 
   async onShow() {
@@ -29,11 +31,28 @@ Page({
     }
 
     try {
-      const res = await callCloudFunction('template', { action: 'myTemplates' })
-      this.setData({
-        myTemplates: res.templates || [],
-        loading: false
-      })
+      const [templateRes, adminRes] = await Promise.all([
+        callCloudFunction('template', { action: 'myTemplates' }),
+        api.checkAdmin().catch(() => ({ success: true, isAdmin: false }))
+      ])
+
+      const updateData = {
+        myTemplates: templateRes.templates || [],
+        loading: false,
+        isAdmin: adminRes.isAdmin || false
+      }
+
+      // 如果是管理员，获取待审核数量
+      if (updateData.isAdmin) {
+        try {
+          const pendingRes = await api.listPendingTemplates()
+          updateData.pendingCount = (pendingRes.templates || []).length
+        } catch (e) {
+          updateData.pendingCount = 0
+        }
+      }
+
+      this.setData(updateData)
     } catch (err) {
       this.setData({ loading: false })
     }
@@ -63,12 +82,38 @@ Page({
     })
   },
 
+  // 进入审核页面
+  onGoReview() {
+    wx.navigateTo({ url: '/pages/admin/review/index' })
+  },
+
   // 更新头像
-  onChooseAvatar(e) {
-    const avatarUrl = e.detail.avatarUrl
-    auth.updateUserInfo({ avatarUrl }).then(userInfo => {
+  async onChooseAvatar(e) {
+    const tempUrl = e.detail.avatarUrl
+    if (!tempUrl) return
+
+    wx.showLoading({ title: '上传中...' })
+    try {
+      // 上传临时头像到云存储
+      const ext = tempUrl.split('.').pop() || 'png'
+      const cloudPath = `avatars/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+      const uploadRes = await wx.cloud.uploadFile({
+        cloudPath,
+        filePath: tempUrl
+      })
+
+      // 直接使用 fileID（cloud:// 格式），小程序 image 组件可直接加载
+      const avatarUrl = uploadRes.fileID
+
+      const userInfo = await auth.updateUserInfo({ avatarUrl })
       this.setData({ userInfo })
-    })
+      wx.hideLoading()
+      wx.showToast({ title: '头像已更新', icon: 'success' })
+    } catch (err) {
+      wx.hideLoading()
+      console.error('上传头像失败:', err)
+      wx.showToast({ title: '上传失败', icon: 'none' })
+    }
   },
 
   // 更新昵称

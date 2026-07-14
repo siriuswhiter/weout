@@ -34,16 +34,20 @@
 }
 
 .avatar-btn {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-  padding: 0;
-  margin: 0;
+  width: 160rpx !important;
+  height: 160rpx !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  margin: 0 !important;
   overflow: hidden;
   background: transparent;
   line-height: normal;
   border: 6rpx solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .avatar-btn::after {
@@ -54,6 +58,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  display: block;
 }
 
 .avatar-placeholder {
@@ -100,6 +105,52 @@
   border-bottom: 2rpx solid rgba(255, 255, 255, 0.3);
 }
 
+/* 管理员入口 */
+.admin-section {
+  margin: -32rpx 24rpx 0;
+  position: relative;
+}
+
+.admin-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-xl);
+  padding: 28rpx 32rpx;
+  box-shadow: var(--shadow-md);
+}
+
+.admin-entry__left {
+  display: flex;
+  align-items: center;
+}
+
+.admin-entry__title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.admin-entry__right {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.admin-entry__badge {
+  background: #FF6B6B;
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 600;
+  min-width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 36rpx;
+  padding: 0 10rpx;
+}
+
 /* 功能区块 */
 .section {
   margin: -32rpx 24rpx 0;
@@ -108,6 +159,10 @@
   border-radius: var(--radius-xl);
   padding: 32rpx;
   box-shadow: var(--shadow-md);
+}
+
+.section--after-admin {
+  margin-top: 16rpx;
 }
 
 .section-header {

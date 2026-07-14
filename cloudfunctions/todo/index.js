@@ -40,7 +40,7 @@ exports.main = async (event, context) => {
 
 // 创建 Todo
 async function createTodo(userId, event) {
-  const { tripId, content, assignType, assigneeIds, dueDate, note } = event
+  const { tripId, content, assignType, assigneeIds, dueDate, note, tags, tag, priority } = event
 
   if (!tripId || !content) {
     return { success: false, error: '参数不完整' }
@@ -55,6 +55,8 @@ async function createTodo(userId, event) {
   const todoData = {
     tripId,
     content: content.trim(),
+    tags: tags || (tag ? [tag] : []),
+    priority: priority || 'normal', // normal | high | urgent
     assignType: assignType || 'all',
     assigneeIds: assignType === 'specific' ? (assigneeIds || []) : [],
     dueDate: dueDate ? new Date(dueDate) : null,
@@ -96,10 +98,12 @@ async function listTodos(userId, event) {
 
 // 更新 Todo
 async function updateTodo(userId, event) {
-  const { todoId, content, assignType, assigneeIds, dueDate, note } = event
+  const { todoId, content, assignType, assigneeIds, dueDate, note, tags, priority } = event
 
   const updateData = {}
   if (content !== undefined) updateData.content = content.trim()
+  if (tags !== undefined) updateData.tags = tags
+  if (priority !== undefined) updateData.priority = priority
   if (assignType !== undefined) updateData.assignType = assignType
   if (assigneeIds !== undefined) updateData.assigneeIds = assigneeIds
   if (dueDate !== undefined) updateData.dueDate = dueDate ? new Date(dueDate) : null

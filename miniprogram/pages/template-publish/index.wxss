@@ -10,10 +10,75 @@
   gap: 12rpx;
 }
 
+/* 模板描述 */
+.desc-textarea {
+  min-height: 120rpx;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--font-md);
+  line-height: 1.6;
+}
+
+.desc-counter {
+  text-align: right;
+  font-size: 22rpx;
+  color: var(--color-text-placeholder);
+  margin-top: 8rpx;
+}
+
+.input-label__hint {
+  font-size: var(--font-sm);
+  color: var(--color-text-placeholder);
+  font-weight: 400;
+}
+
+/* 自定义标签 */
+.custom-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.custom-tag-input {
+  flex: 1;
+  height: 68rpx;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 0 24rpx;
+  font-size: var(--font-sm);
+  color: var(--color-text);
+}
+
+.custom-tag-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  height: 68rpx;
+  padding: 0 24rpx;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.custom-tag-add-btn:active {
+  opacity: 0.7;
+}
+
 .visibility-desc {
   font-size: var(--font-sm);
   color: var(--color-text-placeholder);
   margin-top: 12rpx;
+  padding-left: 4rpx;
+}
+
+.visibility-review-hint {
+  font-size: 22rpx;
+  color: #FF9F0A;
+  margin-top: 8rpx;
   padding-left: 4rpx;
 }
 

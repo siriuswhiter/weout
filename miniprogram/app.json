@@ -7,7 +7,8 @@
     "pages/square/index/index",
     "pages/square/detail/index",
     "pages/profile/index",
-    "pages/template-publish/index"
+    "pages/template-publish/index",
+    "pages/admin/review/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

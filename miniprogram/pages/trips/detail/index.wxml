@@ -4,18 +4,24 @@
   <view wx:else>
     <!-- 行程信息头部 -->
     <view class="trip-header">
-      <view class="trip-header__meta">
-        <view class="trip-header__meta-item" wx:if="{{dateText}}">
-          <view class="icon icon-sm icon-calendar"></view>
-          <text>{{dateText}}</text>
+      <view class="trip-header__top">
+        <view class="trip-header__meta">
+          <view class="trip-header__meta-item" wx:if="{{dateText}}">
+            <view class="icon icon-sm icon-calendar"></view>
+            <text>{{dateText}}</text>
+          </view>
+          <view class="trip-header__meta-item" wx:if="{{trip.destination}}">
+            <view class="icon icon-sm icon-map-pin"></view>
+            <text>{{trip.destination}}</text>
+          </view>
+          <view class="trip-header__meta-item">
+            <view class="icon icon-sm icon-users"></view>
+            <text>{{members.length}}人</text>
+          </view>
         </view>
-        <view class="trip-header__meta-item" wx:if="{{trip.destination}}">
-          <view class="icon icon-sm icon-map-pin"></view>
-          <text>{{trip.destination}}</text>
-        </view>
-        <view class="trip-header__meta-item">
-          <view class="icon icon-sm icon-users"></view>
-          <text>{{members.length}}人</text>
+        <!-- 更多操作 -->
+        <view class="trip-header__more" bindtap="onShowMore">
+          <view class="icon icon-sm icon-dots-three"></view>
         </view>
       </view>
       <!-- 成员列表 -->
@@ -25,7 +31,8 @@
           wx:key="_id"
           class="member-chip"
         >
-          <view class="member-chip__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+          <image wx:if="{{item.avatarUrl}}" class="member-chip__avatar-img" src="{{item.avatarUrl}}" mode="aspectFill" />
+          <view wx:else class="member-chip__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
           <text class="member-chip__name">{{item.nickName}}</text>
         </view>
         <view class="member-chip member-chip--add" bindtap="onInvite">
@@ -36,7 +43,7 @@
       </view>
     </view>
 
-    <!-- 筛选 Tab -->
+    <!-- 筛选栏（状态 + 标签合并为一行） -->
     <view class="filter-bar">
       <view
         class="filter-tab {{filter === 'all' ? 'filter-tab--active' : ''}}"
@@ -53,6 +60,15 @@
         data-filter="undone"
         bindtap="onFilterChange"
       >未完成</view>
+      <!-- 标签筛选（动态从 todos 中提取） -->
+      <view wx:if="{{todoTags.length > 0}}" class="filter-divider"></view>
+      <view
+        wx:for="{{todoTags}}"
+        wx:key="*this"
+        class="filter-tab {{tagFilter === item ? 'filter-tab--active' : ''}}"
+        data-tag="{{item}}"
+        bindtap="onTagFilterChange"
+      >{{item}}</view>
     </view>
 
     <!-- Todo 列表 -->
@@ -60,7 +76,7 @@
       <view class="empty-state" wx:if="{{filteredTodos.length === 0}}">
         <view class="empty-state-icon"><view class="icon icon-xxl icon-note-pencil"></view></view>
         <view class="empty-state-text">暂无待办事项</view>
-        <view class="empty-state-hint">点击下方按钮添加</view>
+        <view class="empty-state-hint">点击右下角 + 添加</view>
       </view>
 
       <view class="todo-list__card" wx:else>
@@ -71,27 +87,23 @@
           members="{{members}}"
           bind:toggle="onToggleTodo"
           bind:delete="onDeleteTodo"
+          bind:edit="onEditTodo"
         />
       </view>
     </view>
 
-    <!-- 底部操作栏 -->
-    <view class="bottom-bar">
-      <button class="btn btn-primary flex-1" bindtap="onShowAddModal">
-        <view class="icon icon-sm icon-plus" style="margin-right: 8rpx;"></view>
-        添加待办
-      </button>
-      <button class="btn btn-secondary" bindtap="onUseTemplate">
-        <view class="icon icon-sm icon-list-checks"></view>
-      </button>
+    <!-- FAB 悬浮按钮 -->
+    <view class="fab" bindtap="onShowAddModal">
+      <view class="icon icon-lg icon-plus"></view>
     </view>
 
-    <!-- 添加 Todo 弹窗 -->
+    <!-- 添加/编辑 Todo 弹窗 -->
     <add-todo-modal
-      wx:if="{{showAddModal}}"
+      id="addTodoModal"
       show="{{showAddModal}}"
       members="{{members}}"
-      bind:confirm="onAddTodo"
+      existingTags="{{todoTags}}"
+      bind:confirm="onConfirmTodo"
       bind:close="onCloseAddModal"
     />
   </view>

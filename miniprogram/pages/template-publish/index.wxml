@@ -12,6 +12,20 @@
       />
     </view>
 
+    <!-- 模板描述 -->
+    <view class="form-group">
+      <view class="input-label">模板描述 <text class="input-label__hint">（选填）</text></view>
+      <textarea
+        class="input-field desc-textarea"
+        placeholder="简单介绍一下这个模板..."
+        value="{{description}}"
+        bindinput="onDescInput"
+        maxlength="200"
+        auto-height
+      />
+      <view class="desc-counter" wx:if="{{description.length > 0}}">{{description.length}}/200</view>
+    </view>
+
     <!-- 标签选择 -->
     <view class="form-group">
       <view class="input-label">标签（可多选）</view>
@@ -19,10 +33,26 @@
         <view
           wx:for="{{allTags}}"
           wx:key="*this"
-          class="tag {{selectedTags.indexOf(item) > -1 ? 'tag-primary' : 'tag-default'}}"
+          class="tag {{tagSelected[item] ? 'tag-primary' : 'tag-default'}}"
           data-tag="{{item}}"
           bindtap="onTagTap"
         >{{item}}</view>
+      </view>
+      <!-- 自定义标签输入 -->
+      <view class="custom-tag-row">
+        <input
+          class="custom-tag-input"
+          placeholder="添加自定义标签"
+          value="{{customTagInput}}"
+          bindinput="onCustomTagInput"
+          bindconfirm="onAddCustomTag"
+          maxlength="10"
+          confirm-type="done"
+        />
+        <view class="custom-tag-add-btn" bindtap="onAddCustomTag">
+          <view class="icon icon-sm icon-plus"></view>
+          <text>添加</text>
+        </view>
       </view>
     </view>
 
@@ -35,6 +65,7 @@
         </view>
       </picker>
       <view class="visibility-desc">{{visibilityOptions[visibilityIndex].desc}}</view>
+      <view wx:if="{{visibilityIndex === 0}}" class="visibility-review-hint">公开模板需要审核通过后才会展示在广场</view>
     </view>
 
     <!-- Todo 项选择 -->

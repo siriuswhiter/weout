@@ -15,6 +15,7 @@ Component({
 
   data: {
     assigneeInfo: [],
+    tagLabels: [],
     dueDateText: '',
     dueDateClass: ''
   },
@@ -33,8 +34,9 @@ Component({
           return member ? {
             text: getAvatarText(member.nickName),
             color: getAvatarColor(member._id),
+            avatarUrl: member.avatarUrl || '',
             nickName: member.nickName
-          } : { text: '?', color: '#ccc' }
+          } : { text: '?', color: '#ccc', avatarUrl: '' }
         })
       }
 
@@ -50,7 +52,13 @@ Component({
         }
       }
 
-      this.setData({ assigneeInfo, dueDateText, dueDateClass })
+      // 处理标签（兼容旧 tag 字符串和新 tags 数组）
+      let tagLabels = todo.tags || []
+      if (tagLabels.length === 0 && todo.tag) {
+        tagLabels = [todo.tag]
+      }
+
+      this.setData({ assigneeInfo, tagLabels, dueDateText, dueDateClass })
     }
   },
 
@@ -61,6 +69,11 @@ Component({
 
     onDelete() {
       this.triggerEvent('delete', { todo: this.properties.todo })
+    },
+
+    onLongPress() {
+      wx.vibrateShort({ type: 'medium' })
+      this.triggerEvent('edit', { todo: this.properties.todo })
     },
 
     // 左滑删除相关

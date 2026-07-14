@@ -85,6 +85,30 @@ const api = {
   deleteTemplate(templateId) {
     return callCloudFunction('template', { action: 'delete', templateId })
   },
+  reviewTemplate(templateId, status, reviewNote) {
+    return callCloudFunction('template', { action: 'review', templateId, status, reviewNote })
+  },
+  listPendingTemplates() {
+    return callCloudFunction('template', { action: 'pendingList' })
+  },
+  checkAdmin() {
+    return callCloudFunction('template', { action: 'checkAdmin' })
+  },
+  getPopularTags() {
+    return callCloudFunction('template', { action: 'popularTags' })
+  },
+  // 初始化/更新预置官方模板（仅管理员，幂等；force=true 覆盖更新）
+  seedPresetTemplates(force = false) {
+    return callCloudFunction('template', { action: 'seedPresets', force })
+  },
+  // 管理员：获取全部模板（可按状态筛选/关键词搜索）
+  adminListTemplates(query = {}) {
+    return callCloudFunction('template', { action: 'adminList', ...query })
+  },
+  // 管理员：删除任意模板
+  adminDeleteTemplate(templateId) {
+    return callCloudFunction('template', { action: 'adminDelete', templateId })
+  },
 
   // ========== 点赞相关 ==========
   likeTemplate(templateId) {

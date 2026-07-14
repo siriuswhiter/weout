@@ -1,8 +1,12 @@
 <view
-  class="todo-item"
+  class="todo-item {{todo.priority === 'urgent' ? 'todo-item--urgent' : (todo.priority === 'high' ? 'todo-item--high' : '')}}"
   bindtouchstart="onTouchStart"
   bindtouchend="onTouchEnd"
+  bindlongpress="onLongPress"
 >
+  <!-- 优先级色条 -->
+  <view wx:if="{{todo.priority && todo.priority !== 'normal'}}" class="todo-item__priority-bar todo-item__priority-bar--{{todo.priority}}"></view>
+
   <!-- 完成按钮 -->
   <view class="todo-item__check" bindtap="onToggle">
     <view wx:if="{{todo.completed}}" class="icon icon-md icon-check-circle"></view>
@@ -11,7 +15,10 @@
 
   <!-- 内容 -->
   <view class="todo-item__content">
-    <view class="todo-item__text {{todo.completed ? 'todo-item__text--done' : ''}}">{{todo.content}}</view>
+    <view class="todo-item__text-row">
+      <view class="todo-item__text {{todo.completed ? 'todo-item__text--done' : ''}}">{{todo.content}}</view>
+      <view wx:for="{{tagLabels}}" wx:key="*this" class="todo-item__tag">{{item}}</view>
+    </view>
     <view class="todo-item__meta" wx:if="{{dueDateText}}">
       <text class="todo-item__due {{dueDateClass}}"><view class="icon icon-sm icon-calendar" style="margin-right: 4rpx;"></view> {{dueDateText}}</text>
     </view>
@@ -21,7 +28,10 @@
   <view class="todo-item__assignee">
     <block wx:for="{{assigneeInfo}}" wx:key="text">
       <view wx:if="{{item.isAll}}" class="tag tag-warning" style="font-size: 20rpx; padding: 4rpx 12rpx;">所有人</view>
-      <view wx:else class="todo-item__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+      <block wx:else>
+        <image wx:if="{{item.avatarUrl}}" class="todo-item__avatar-img" src="{{item.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="todo-item__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+      </block>
     </block>
   </view>
 </view>

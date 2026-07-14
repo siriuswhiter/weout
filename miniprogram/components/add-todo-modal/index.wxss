@@ -86,6 +86,135 @@
   background-color: var(--color-border);
 }
 
+/* 标签输入区域 */
+.tags-input-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 20rpx;
+  background-color: var(--color-bg-gray);
+  border-radius: var(--radius-lg);
+  min-height: 80rpx;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 8rpx 12rpx 8rpx 20rpx;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-round);
+  font-size: 24rpx;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.tag-chip__text {
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag-chip__remove {
+  width: 32rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: var(--color-primary);
+  opacity: 0.6;
+  border-radius: 50%;
+}
+
+.tag-chip__remove:active {
+  opacity: 1;
+  background-color: rgba(79, 110, 247, 0.15);
+}
+
+.tags-input {
+  flex: 1;
+  min-width: 200rpx;
+  font-size: var(--font-sm);
+  background: transparent;
+  height: 48rpx;
+  line-height: 48rpx;
+}
+
+/* 选择已有标签 */
+.existing-tags {
+  margin-top: 16rpx;
+}
+
+.existing-tags__label {
+  font-size: 22rpx;
+  color: var(--color-text-placeholder);
+  margin-bottom: 12rpx;
+}
+
+.existing-tags__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.existing-tag {
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-round);
+  font-size: 24rpx;
+  font-weight: 500;
+  background: var(--color-bg-gray);
+  color: var(--color-text-secondary);
+  border: 2rpx solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.existing-tag--active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* 优先级选择 */
+.priority-wrap {
+  display: flex;
+  gap: 12rpx;
+}
+
+.priority-option {
+  flex: 1;
+  text-align: center;
+  padding: 14rpx 0;
+  border-radius: var(--radius-lg);
+  font-size: 24rpx;
+  font-weight: 500;
+  background: var(--color-bg-gray);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  border: 2rpx solid transparent;
+}
+
+.priority-option--active.priority-option--normal {
+  background: var(--color-bg-gray);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.priority-option--active.priority-option--high {
+  background: #FFF8EC;
+  color: #FF9F0A;
+  border-color: #FFD88A;
+}
+
+.priority-option--active.priority-option--urgent {
+  background: #FFF0F0;
+  color: #FF6B6B;
+  border-color: #FFD4D4;
+}
+
 .note-input {
   min-height: 120rpx;
   width: 100%;

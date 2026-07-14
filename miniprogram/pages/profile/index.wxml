@@ -20,8 +20,22 @@
     </view>
   </view>
 
+  <!-- 管理员审核入口 -->
+  <view wx:if="{{isAdmin}}" class="admin-section" bindtap="onGoReview">
+    <view class="admin-entry">
+      <view class="admin-entry__left">
+        <view class="icon icon-md icon-shield-check" style="color: #4F6EF7; margin-right: 12rpx;"></view>
+        <text class="admin-entry__title">模板管理</text>
+      </view>
+      <view class="admin-entry__right">
+        <view wx:if="{{pendingCount > 0}}" class="admin-entry__badge">{{pendingCount}}</view>
+        <view class="icon icon-sm icon-caret-right" style="color: var(--color-text-placeholder);"></view>
+      </view>
+    </view>
+  </view>
+
   <!-- 功能入口 -->
-  <view class="section">
+  <view class="section {{isAdmin ? 'section--after-admin' : ''}}">
     <view class="section-header">
       <text class="section__title">我的模板</text>
       <view class="section-count-badge">{{myTemplates.length}}</view>
@@ -34,6 +48,7 @@
         wx:key="_id"
         template="{{item}}"
         showDelete="{{true}}"
+        showStatus="{{true}}"
         bind:templatetap="onTemplateTap"
         bind:templatedelete="onDeleteTemplate"
       />

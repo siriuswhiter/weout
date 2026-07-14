@@ -19,12 +19,10 @@
     <view class="trip-card__right">
       <view class="trip-card__progress" style="color: {{progressColor}}; background-color: {{progressBgColor}}">{{progressText}}</view>
       <view class="trip-card__members">
-        <view
-          wx:for="{{memberList}}"
-          wx:key="_id"
-          class="trip-card__avatar"
-          style="background-color: {{item.color}}"
-        >{{item.text}}</view>
+        <block wx:for="{{memberList}}" wx:key="_id">
+          <image wx:if="{{item.avatarUrl}}" class="trip-card__avatar-img" src="{{item.avatarUrl}}" mode="aspectFill" />
+          <view wx:else class="trip-card__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+        </block>
         <view class="trip-card__member-count" wx:if="{{trip.memberIds.length > 4}}">+{{trip.memberIds.length - 4}}</view>
       </view>
     </view>

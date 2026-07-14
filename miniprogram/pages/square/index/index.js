@@ -3,7 +3,7 @@ const { TEMPLATE_TAGS } = require('../../../utils/constants')
 
 Page({
   data: {
-    tags: ['全部', ...TEMPLATE_TAGS],
+    tags: ['全部'],
     activeTag: '全部',
     keyword: '',
     templates: [],
@@ -25,7 +25,21 @@ Page({
     // 等待登录完成再加载数据
     const app = getApp()
     await app.getUserId()
+    this.loadPopularTags()
     this.loadTemplates()
+  },
+
+  async loadPopularTags() {
+    try {
+      const res = await api.getPopularTags()
+      const popularTags = (res.popularTags || []).map(t => t.tag)
+      // 合并热门标签和预设标签（去重），热门标签优先
+      const merged = [...new Set([...popularTags, ...TEMPLATE_TAGS])]
+      this.setData({ tags: ['全部', ...merged] })
+    } catch (err) {
+      // 降级使用预设标签
+      this.setData({ tags: ['全部', ...TEMPLATE_TAGS] })
+    }
   },
 
   onPullDownRefresh() {

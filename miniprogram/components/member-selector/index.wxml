@@ -15,7 +15,8 @@
     data-id="{{item._id}}"
     bindtap="onSelectMember"
   >
-    <view class="member-option__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
+    <image wx:if="{{item.avatarUrl}}" class="member-option__avatar-img" src="{{item.avatarUrl}}" mode="aspectFill" />
+    <view wx:else class="member-option__avatar" style="background-color: {{item.color}}">{{item.text}}</view>
     <text>{{item.nickName}}</text>
   </view>
 </view>

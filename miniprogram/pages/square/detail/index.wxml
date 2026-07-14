@@ -6,7 +6,8 @@
     <view class="template-header">
       <view class="template-header__name">{{template.name}}</view>
       <view class="template-header__creator" wx:if="{{creatorInfo}}">
-        <view class="creator-avatar" style="background-color: {{creatorInfo.color}}">{{creatorInfo.text}}</view>
+        <image wx:if="{{creatorInfo.avatarUrl}}" class="creator-avatar-img" src="{{creatorInfo.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="creator-avatar" style="background-color: {{creatorInfo.color}}">{{creatorInfo.text}}</view>
         <text class="creator-name">{{creatorInfo.nickName}}</text>
       </view>
       <view class="template-header__tags" wx:if="{{template.tags.length > 0}}">
@@ -27,8 +28,15 @@
           wx:key="index"
           class="template-item"
         >
-          <view class="template-item__circle"><view class="icon icon-sm icon-circle"></view></view>
-          <view class="template-item__content">{{item.content}}</view>
+          <view class="template-item__circle {{item.priority === 'urgent' ? 'template-item__circle--urgent' : item.priority === 'high' ? 'template-item__circle--high' : ''}}"><view class="icon icon-sm icon-circle"></view></view>
+          <view class="template-item__main">
+            <view class="template-item__content">{{item.content}}</view>
+            <view class="template-item__meta" wx:if="{{(item.tags && item.tags.length > 0) || item.priority === 'high' || item.priority === 'urgent'}}">
+              <view wx:if="{{item.priority === 'urgent'}}" class="item-badge item-badge--urgent">紧急</view>
+              <view wx:elif="{{item.priority === 'high'}}" class="item-badge item-badge--high">重要</view>
+              <view wx:for="{{item.tags}}" wx:for-item="tg" wx:key="*this" class="item-badge item-badge--tag">{{tg}}</view>
+            </view>
+          </view>
           <view class="tag tag-warning" wx:if="{{item.assignType === 'all'}}" style="font-size: 20rpx; padding: 4rpx 12rpx;">所有人</view>
         </view>
       </view>
