@@ -4,26 +4,17 @@
   padding: var(--spacing-lg);
 }
 
-.form-group {
-  margin-bottom: var(--spacing-lg);
-}
-
 .tags-wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 12rpx;
 }
 
-.picker-field {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-}
-
 .visibility-desc {
   font-size: var(--font-sm);
   color: var(--color-text-placeholder);
-  margin-top: 8rpx;
+  margin-top: 12rpx;
+  padding-left: 4rpx;
 }
 
 .todo-select-list {
@@ -40,14 +31,24 @@
   padding: 24rpx 24rpx;
   border-bottom: 1rpx solid var(--color-border-light);
   transition: background-color var(--transition-fast);
+  min-height: 88rpx;
+  box-sizing: border-box;
 }
 
 .todo-select-item:last-child {
   border-bottom: none;
 }
 
+.todo-select-item:active {
+  background-color: var(--color-bg);
+}
+
 .todo-select-item--selected {
   background-color: var(--color-primary-light);
+}
+
+.todo-select-item--selected:active {
+  background-color: var(--color-primary-soft);
 }
 
 .todo-select-check {

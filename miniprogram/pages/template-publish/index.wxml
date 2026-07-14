@@ -32,9 +32,9 @@
       <picker range="{{visibilityOptions}}" range-key="label" value="{{visibilityIndex}}" bindchange="onVisibilityChange">
         <view class="input-field picker-field">
           <text>{{visibilityOptions[visibilityIndex].label}}</text>
-          <text class="visibility-desc">{{visibilityOptions[visibilityIndex].desc}}</text>
         </view>
       </picker>
+      <view class="visibility-desc">{{visibilityOptions[visibilityIndex].desc}}</view>
     </view>
 
     <!-- Todo 项选择 -->

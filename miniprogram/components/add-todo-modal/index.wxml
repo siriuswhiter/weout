@@ -5,7 +5,7 @@
       <view class="modal-sheet__bar"></view>
     </view>
 
-    <view class="modal-sheet__title">添加 Todo</view>
+    <view class="modal-sheet__title">添加待办</view>
 
     <!-- 内容输入 -->
     <view class="form-group">
@@ -34,8 +34,8 @@
     <view class="form-group">
       <view class="input-label">截止时间（可选）</view>
       <view class="due-date-row">
-        <picker mode="date" value="{{dueDate}}" start="{{today}}" bindchange="onDueDateChange">
-          <view class="input-field picker-field" style="flex: 1;">
+        <picker class="due-date-picker" mode="date" value="{{dueDate}}" start="{{today}}" bindchange="onDueDateChange">
+          <view class="input-field picker-field">
             <text wx:if="{{dueDate}}">{{dueDate}}</text>
             <text wx:else class="placeholder-text">选择日期</text>
           </view>

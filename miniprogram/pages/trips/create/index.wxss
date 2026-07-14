@@ -4,20 +4,6 @@
   padding: var(--spacing-lg);
 }
 
-.form-group {
-  margin-bottom: var(--spacing-lg);
-}
-
-.picker-field {
-  display: flex;
-  align-items: center;
-  min-height: 44rpx;
-}
-
-.placeholder {
-  color: var(--color-text-placeholder);
-}
-
 .submit-btn {
   margin-top: var(--spacing-2xl);
   height: 92rpx;

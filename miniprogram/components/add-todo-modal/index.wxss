@@ -51,16 +51,22 @@
   color: var(--color-text-placeholder);
 }
 
+/* 日期选择行 */
 .due-date-row {
   display: flex;
   align-items: center;
   gap: 12rpx;
 }
 
+.due-date-picker {
+  flex: 1;
+}
+
+/* Picker 输入框 */
 .picker-field {
   display: flex;
   align-items: center;
-  min-height: 44rpx;
+  min-height: 88rpx;
 }
 
 .clear-btn {
@@ -73,6 +79,7 @@
   font-size: var(--font-md);
   border-radius: 50%;
   background-color: var(--color-bg-gray);
+  flex-shrink: 0;
 }
 
 .clear-btn:active {
@@ -80,8 +87,9 @@
 }
 
 .note-input {
-  min-height: 80rpx;
+  min-height: 120rpx;
   width: 100%;
+  line-height: 1.6;
 }
 
 .confirm-btn {
